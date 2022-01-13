@@ -15,9 +15,9 @@ int main() {
   for (int i = 1; i <= n; i++) {
     cin >> v[i] >> w[i];
   }
-  vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+  vector<vector<int>> dp(n + 3, vector<int>(m + 3));
   for (int i = n; i; i--) {
-    for (int j = m; j >= v[i]; j--) {
+    for (int j = 0; j <= m; j++) {
       dp[i][j] = dp[i + 1][j];
       if (j >= v[i]) {
         dp[i][j] = max(dp[i][j], dp[i + 1][j - v[i]] + w[i]);
