@@ -17,6 +17,7 @@
     "functional": "cpp",
     "algorithm": "cpp",
     "iosfwd": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "queue": "cpp"
   }
 }
