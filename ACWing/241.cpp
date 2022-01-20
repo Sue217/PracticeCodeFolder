@@ -16,21 +16,21 @@ class fenwick {
     fenw.resize(n);
   }
 
-   inline void modify(int x, T v) {
-     while (x <= n) {
-       fenw[x] += v;
-       x += (x & -x);
-     }
-   }
+  inline void modify(int x, T v) {
+    while (x <= n) {
+      fenw[x] += v;
+      x += (x & -x);
+    }
+  }
 
-   inline T get(int x) {
-     T v{};
-     while (x >= 1) {
-       v += fenw[x];
-       x -= (x & -x);
-     }
-     return v;
-   }
+  inline T get(int x) {
+    T v{};
+    while (x >= 1) {
+      v += fenw[x];
+      x -= (x & -x);
+    }
+    return v;
+  }
 
   void remake(int _n, T v) {
     fenw.assign(_n, v);

@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 19.01.2022 22:53:28
+ *    created: 20.01.2022 10:30:38
 **/
 #include <bits/stdc++.h>
 
@@ -9,27 +9,28 @@ using namespace std;
 template <typename T>
 class fenwick {
  public:
-  vector<T> fenw;
+  vector<T> fenw, psum;
   int n;
 
   fenwick(int _n) : n(_n) {
     fenw.resize(n);
+    psum.resize(n);
   }
 
   inline void modify(int x, T v) {
-    while (x <= n) {
-      fenw[x] += v;
-      x += (x & -x);
+    for (int i = x; i <= n; i += (i & -i)) {
+      fenw[i] += v;
+      psum[i] += 1ll * x * v;
     }
   }
 
   inline T get(int x) {
-    T v{};
-    while (x > 0) {
-      v += fenw[x];
-      x -= (x & -x);
+    T v{}, u{};
+    for (int i = x; i >= 1; i -= (i & -i)) {
+      v += fenw[i];
+      u += psum[i];
     }
-    return v;
+    return v * (x + 1) - u;
   }
 };
 
@@ -49,16 +50,17 @@ int main() {
   for (int i = 0; i < m; i++) {
     char op;
     cin >> op;
-    if (op == 'Q') {
-      int x;
-      cin >> x;
-      cout << fenw.get(x) << '\n';
-    } else
     if (op == 'C') {
-      int l, r, d;
+      int l, r;
+      long long d;
       cin >> l >> r >> d;
       fenw.modify(l, d);
       fenw.modify(r + 1, -d);
+    } else
+    if (op == 'Q') {
+      int l, r;
+      cin >> l >> r;
+      cout << fenw.get(r) - fenw.get(l - 1) << '\n';
     }
   }
   return 0;
