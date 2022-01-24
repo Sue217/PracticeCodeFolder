@@ -18,6 +18,7 @@
     "algorithm": "cpp",
     "iosfwd": "cpp",
     "vector": "cpp",
-    "queue": "cpp"
+    "queue": "cpp",
+    "iostream": "cpp"
   }
 }

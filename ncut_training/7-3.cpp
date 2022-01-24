@@ -27,8 +27,8 @@ int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
   int n;
-  n = read<int>();
-  // cin >> n;
+  // n = read<int>();
+  cin >> n;
   auto check = [&](int x) {
     if (x >= 90) {
       return 0;
@@ -54,6 +54,6 @@ int main() {
   for (int id = 0; id < 4; id++) {
     cout << level[id] << " ";
   }
-  cout << level[4] << '\n';
+  cout << level[4];
   return 0;
 }
