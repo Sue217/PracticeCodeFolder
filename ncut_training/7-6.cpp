@@ -11,23 +11,20 @@ int main() {
   cin.tie(0);
   int n;
   cin >> n;
-  vector<int> tree(n * 2 + 2);
+  vector<pair<int, int>> tree(n + 1);
   for (int i = 1; i <= n; i++) {
     int left, right;
     cin >> left >> right;
-    if (tree[i] == 0) {
-      tree[i] = i;
-    }
-    tree[i * 2] = left;
-    tree[i * 2 + 1] = right;
+    tree[i].first = left;
+    tree[i].second = right;
   }
   function<void(int)> Dfs = [&](int p) {
-    if (p > n || tree[p] == 0) {
+    if (p == 0) {
       return;
     }
-    cout << tree[p] << " ";
-    Dfs(p * 2);
-    Dfs(p * 2 + 1);
+    cout << p << " ";
+    Dfs(tree[p].first);
+    Dfs(tree[p].second);
   };
   Dfs(1);
   cout << '\n';

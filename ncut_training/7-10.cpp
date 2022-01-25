@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 24.01.2022 21:10:50
+ *    created: 25.01.2022 18:18:04
 **/
 #include <bits/stdc++.h>
 
@@ -14,22 +14,18 @@ int main() {
   while (tt--) {
     int n;
     cin >> n;
-    vector<int> seq(n);
-    for (auto& in : seq) {
-      cin >> in;
+    set<int> st;
+    for (int i = 0; i < n; i++) {
+      int x;
+      cin >> x;
+      st.insert(x);
     }
-    sort(seq.begin(), seq.end());
-    int sec = seq.front();
-    bool ok = true;
-    for (auto it : seq) {
-      if (it > sec) {
-        cout << it << '\n';
-        ok = false;
-        break;
-      }
-    }
-    if (ok) {
-      puts("NO");
+    if (st.size() == 1) {
+      cout << "NO" << '\n';
+    } else {
+      auto it = st.begin();
+      it++;
+      cout << *it << '\n';
     }
   }
   return 0;

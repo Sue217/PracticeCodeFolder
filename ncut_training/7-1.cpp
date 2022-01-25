@@ -9,13 +9,15 @@ using namespace std;
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  vector<string> score;
   string s, xs;
   while (cin >> s) {
     xs += s;
   }
-  int w = 0, l = 0, cnt = 0;
-  int i = 0;
+  if (xs.size() == 0 || xs.size() == 1) {
+    puts("0:0");
+    return 0;
+  }
+  int w = 0, l = 0;
   for (char c : xs) {
     if (c == 'E') {
       break;
@@ -26,15 +28,14 @@ int main() {
     if (c == 'L') {
       l += 1;
     }
-    cnt += 1;
-    if (cnt == 11) {
+    if ((w >= 11 || l >= 11) && abs(w - l) >= 2) {
       cout << w << ":" << l << '\n';
-      w = l = cnt = 0;
+      w = l = 0;
     }
   }
   cout << w << ":" << l << '\n';
   cout << '\n';
-  w = 0, l = 0, cnt = 0;
+  w = 0, l = 0;
   for (char c : xs) {
     if (c == 'E') {
       break;
@@ -45,10 +46,9 @@ int main() {
     if (c == 'L') {
       l += 1;
     }
-    cnt += 1;
-    if (cnt == 21) {
+    if ((w >= 21 || l >= 21) && abs(w - l) >= 2) {
       cout << w << ":" << l << '\n';
-      w = l = cnt = 0;
+      w = l = 0;
     }
   }
   cout << w << ":" << l << '\n';
