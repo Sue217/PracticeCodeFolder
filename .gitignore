@@ -1,8 +1,9 @@
 C
-C++
 Python
 MyTinySTL
 Web
 .DS_Store
 *.bin
 .cph
+.out
+modern-cpp-tutorial/

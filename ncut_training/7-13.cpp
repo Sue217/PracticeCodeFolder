@@ -11,14 +11,14 @@ int main() {
   cin.tie(0);
   int n, m;
   cin >> n >> m;
-  map<long long, int> a, b;
+  map<int, int> a, b;
   for (int i = 0; i < n; i++) {
-    long long x;
+    int x;
     cin >> x;
     a[x] += 1;
   }
   for (int i = 0; i < m; i++) {
-    long long x;
+    int x;
     cin >> x;
     b[x] += 1;
   }
@@ -26,9 +26,9 @@ int main() {
   for (auto i : a) {
     long long sum = 0;
     for (auto j : b) {
-      long long p = i.first + j.first;
+      int p = i.first + j.first;
       if (b.find(p) != b.end()) {
-        sum += p * 1ll * i.second * j.second * b[p];
+        sum += 1ll * p * i.second * j.second * b[p];
       }
     }
     ans += sum;

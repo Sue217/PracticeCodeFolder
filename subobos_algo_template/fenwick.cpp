@@ -7,7 +7,7 @@
 using namespace std;
 
 template<typename T>
-class fenwick{
+class fenwick {
  public:
   vector<T> fenw; // psum
   int n;
