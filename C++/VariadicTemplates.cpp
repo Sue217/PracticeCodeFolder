@@ -7,20 +7,19 @@
 
 using namespace std;
 
-template<typename... T>
-void print(const T&... args) {
-  cout << "First: ";
-  // cout << args << endl;
-  print(args...);
+void print() {
+  cout << "Nothing" << endl;
 }
 
-void print() {
-  cout << "Second: " << endl;
+template<typename T>
+void print(const T& args) {
+  cout << "Remaining one: ";
+  cout << args << endl;
 }
 
 template<typename T, typename... A>
 void print(const T& v, const A&... args) {
-  cout << "Second: ";
+  cout << "Printing... ";
   cout << v << endl;
   print(args...);
 }
