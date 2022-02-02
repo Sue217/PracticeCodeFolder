@@ -4,20 +4,20 @@
 **/
 #include <iostream>
 
-// void function(int a);
-// void function(const int a); // error: duplicate definition
+void function(int a);
+void function(const int a); // error: duplicate definition
 
-// // `const` only affects pointers and references
-// void function(int* ptr);
-// void function(const int* ptr); // ok
-// void function(int* const ptr); // error: duplicate definition
+// `const` only affects pointers and references
+void function(int* ptr);
+void function(const int* ptr); // ok
+void function(int* const ptr); // error: duplicate definition
 
-// class overload {
-//  public:
-//   void function(int *);
-//   void function(const int *);
-//   void function(int *) const;
-// };
+class overload {
+ public:
+  void function(int *);
+  void function(const int *);
+  void function(int *) const;
+};
 
 class Base {
  public:
@@ -52,7 +52,7 @@ int main() {
   
   constexpr int v = 42;
 
-  pb->Hide(v);     // Base::Hide  
+  pb->Hide(v);     // Base::Hide
   pd->Hide(v);     // Derived::Hide(Same parameter)
   pd->Hide(v, v);  // Derived::Hide(Different parameter)
 
