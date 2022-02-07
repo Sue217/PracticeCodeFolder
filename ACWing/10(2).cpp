@@ -21,32 +21,27 @@ int main() {
   vector<int> w(n + 1), v(n + 1);
   int root = -1;
   for (int i = 1; i <= n; i++) {
-    int index;
-    cin >> v[i] >> w[i] >> index;
-    if (index == -1) {
+    int id;
+    cin >> v[i] >> w[i] >> id;
+    if (id == -1) {
       root = i;
     } else {
-      Add(index, i);
+      Add(id, i);
     }
   }
   vector<vector<int>> dp(n + 1, vector<int>(m + 1));
   function<void(int)> Dfs = [&](int u) {
-    for (int i = h[u]; ~i; i = ne[i]) { // loop groups
-      int son = e[i];
+    for (int i = v[u]; i <= m; i++) {
+      dp[u][i] = w[u];
+    }
+    for (int id = h[u]; id != -1; id = ne[id]) {
+      int son = e[id];
       Dfs(son);
-      for (int j = m - v[u]; j >= 0; j--) { // loop volume
-        for (int k = 0; k <= j; k++) { // loop decisions
-          dp[u][j] = max(dp[u][j], dp[u][j - k] + dp[son][k]);
+      for (int i = m; i >= v[u]; i--) {
+        for (int j = 0; j <= i - v[u]; j++) {
+          dp[u][i] = max(dp[u][i], dp[u][i - j] + dp[son][j]);
         }
       }
-    }
-    // push u into package
-    for (int i = m; i >= v[u]; i--) {
-      dp[u][i] = dp[u][i - v[u]] + w[u];
-    }
-    // clear bad conditions
-    for (int i = 0; i < v[u]; i++) {
-      dp[u][i] = 0;
     }
   };
   Dfs(root);
