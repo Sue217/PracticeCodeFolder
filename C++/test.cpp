@@ -1,63 +1,30 @@
 /**
- *    author: Jingbo Su
- *    created: February/02/2022 Wednesday
+ *    author: subobo
+ *    created: 08.02.2022 20:03:14
 **/
-#include <iostream>
+#include <bits/stdc++.h>
 
-// void function(int a);
-// void function(const int a); // error: duplicate definition
+using namespace std;
 
-// // `const` only affects pointers and references
-// void function(int* ptr);
-// void function(const int* ptr); // ok
-// void function(int* const ptr); // error: duplicate definition
-
-// class overload {
-//  public:
-//   void function(int *);
-//   void function(const int *);
-//   void function(int *) const;
-// };
-
-class Base {
- public:
-  void Hide(int x) {
-    std::cout << "Base::Hide" << std::endl;
+inline long long mults(long long& a, long long& b, const long long mod) {
+  assert(b >= 0);
+  long long x = a, res = 0;
+  long long p = b;
+  while (p > 0) {
+    if (p & 1) {
+      res = (res + x) % mod;
+    }
+    x = (x + x) % mod;
+    p >>= 1;
   }
-  virtual void Override(int x) {
-    std::cout << "Base::Override" << std::endl;
-  }
-};
-
-class Derived : public Base {
- using Base::Hide;
- using Base::Override;
-
- public:
-  void Hide(int x) {
-    std::cout << "Derived::Hide(Same parameter)" << std::endl;
-  }
-  void Hide(int x, int y) {
-    std::cout << "Derived::Hide(Different parameter)" << std::endl;
-  }
-  void Override(int x) {
-    std::cout << "Derived::Hide" << std::endl;
-  }
-};
+  return res;
+}
 
 int main() {
-  Derived D;
-  Base* pb = &D;
-  Derived* pd = &D;
-  
-  constexpr int v = 42;
-
-  pb->Hide(v);     // Base::Hide  
-  pd->Hide(v);     // Derived::Hide(Same parameter)
-  pd->Hide(v, v);  // Derived::Hide(Different parameter)
-
-  pb->Override(v); // Derived::Hide
-  pd->Override(v); // Derived::Hide
-  
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  long long a, b, p;
+  cin >> a >> b >> p;
+  cout << mults(a, b, p) << '\n';
   return 0;
 }
