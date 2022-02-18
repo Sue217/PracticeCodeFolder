@@ -14,49 +14,47 @@ int main() {
   while (tt--) {
     int r, c;
     cin >> r >> c;
-    if ((r + c) % 2 == 1) {
-      puts("NO SOLUTION");
-      continue;
-    }
-    vector<string> g(r);
-    for (string& in : g) {
-      cin >> in;
+    vector<vector<char>> g(r + 2, vector<char>(c + 2));
+    for (int i = 0; i < r; i++) {
+      for (int j = 0; j < c; j++) {
+        cin >> g[i][j];
+      }
     }
     deque<pair<int, int>> dq;
-    vector<vector<int>> dist(r, vector<int>(c, -1));
+    constexpr int inf = (int) 2e9;
+    vector<vector<int>> dist(r + 2, vector<int>(c + 2, inf));
     array<int, 4> dx{-1, -1, 1, 1}, dy{-1, 1, -1, 1};
+    array<int, 4> ix{-1, -1, 0, 0}, iy{-1, 0, -1, 0};
+    string s = "\\//\\";
     dq.push_back(make_pair(0, 0));
     dist[0][0] = 0;
     while (!dq.empty()) {
       auto t = dq.front();
       dq.pop_front();
       int x = t.first, y = t.second;
-      int d = dist[x][y];
-      cerr << x << ", " << y << '\n';
       for (int i = 0; i < 4; i++) {
         int xx = x + dx[i], yy = y + dy[i];
-        if (xx >= 0 && xx < r && yy >= 0 && yy < c && dist[xx][yy] == -1) {
-          if (i == 0 && i == 3) {
-            if (g[x][y] == '/') {
-              dist[xx][yy] = d + 1;
-              dq.push_back(make_pair(xx, yy));
-            } else {
-              dist[xx][yy] = d;
-              dq.push_front(make_pair(xx, yy));
-            }
-          } else {
-            if (g[x][y] == '/') {
-              dist[xx][yy] = d;
-              dq.push_front(make_pair(xx, yy));
-            } else {
-              dist[xx][yy] = d + 1;
-              dq.push_back(make_pair(xx, yy));
+        if (xx >= 0 && xx <= r && yy >= 0 && yy <= c) {
+          int px = x + ix[i], py = y + iy[i];
+          if (px >= 0 && px < r && py >= 0 && py < c) {
+            auto is_equal = g[px][py] != s[i];
+            if (dist[xx][yy] > dist[x][y] + is_equal) {
+              dist[xx][yy] = dist[x][y] + is_equal;
+              if (is_equal) {
+                dq.push_back(make_pair(xx, yy));
+              } else {
+                dq.push_front(make_pair(xx, yy));
+              }
             }
           }
         }
       }
     }
-    cout << dist[r - 1][c - 1] << '\n';
+    if (dist[r][c] == inf) {
+      cout << "NO SOLUTION" << '\n';
+    } else {
+      cout << dist[r][c] << '\n';
+    }
   }
   return 0;
 }
