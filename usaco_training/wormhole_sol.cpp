@@ -1,32 +1,33 @@
-/**
- *    author: subobo
- *    created: 20.02.2022 11:46:25
-**/
+/*
+    ID: sujingb1
+    TASK: wormhole
+    LANG: C++11
+*/
 #include <bits/stdc++.h>
 
 using namespace std;
 
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(0);
+  ifstream fin ("wormhole.in");
+  ofstream fout ("wormhole.out");
   int n;
-  cin >> n;
+  fin >> n;
   vector<pair<int, int>> point(1);
   for (int i = 0; i < n; i++) {
     int x, y;
-    cin >> x >> y;
+    fin >> x >> y;
     point.emplace_back(x, y);
   }
   int ans = 0;
   vector<bool> paired(n + 1, false);
-  vector<int> ne(n + 1, 0), linked(n + 1, -1);
+  vector<int> ne(n + 1, 0), linked(n + 1, 0);
   auto check = [&]() {
     for (int i = 1; i <= n; i++) {
       int cur = i;
       for (int j = 1; j <= n; j++) {
         cur = linked[ne[cur]];
       }
-      if (cur != -1) {
+      if (cur) {
         return true;
       }
     }
@@ -49,7 +50,7 @@ int main() {
         linked[f] = p; linked[p] = f;
         Dfs();
         paired[f] = paired[p] = false;
-        linked[f] = linked[p] = -1;
+        linked[f] = linked[p] = 0;
       }
     }
   };
@@ -63,6 +64,6 @@ int main() {
     }
   }
   Dfs();
-  cout << ans << '\n';
+  fout << ans << '\n';
   return 0;
 }
