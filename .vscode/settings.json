@@ -19,6 +19,7 @@
     "algorithm": "cpp",
     "vector": "cpp",
     "utility": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "iosfwd": "cpp"
   }
 }
