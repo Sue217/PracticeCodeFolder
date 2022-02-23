@@ -20,6 +20,8 @@
     "vector": "cpp",
     "utility": "cpp",
     "functional": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "ios": "cpp",
+    "array": "cpp"
   }
 }

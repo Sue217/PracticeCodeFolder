@@ -11,39 +11,31 @@ int main() {
   cin.tie(0);
   int n, q;
   cin >> n >> q;
-  vector<int> h(n + 1, -1), e(n + 1), ne(n + 1);
-  int idx = 0;
-  auto Add = [&](int a, int b) {
-    e[idx] = b;
-    ne[idx] = h[a];
-    h[a] = idx++;
-  };
-  for (int i = 2; i <= n; i++) {
+  vector<vector<int>> e(n + 1);
+  vector<int> a(n + 1, 0);
+  for (int id = 2; id <= n; id++) {
     int fa;
     cin >> fa;
-    Add(fa, i);
+    e[fa].emplace_back(id);
   }
-  vector<int> a(n + 1, 0);
-  for (int i = 1; i <= n; i++) {
-    cin >> a[i];
+  for (int id = 1; id <= n; id++) {
+    cin >> a[id];
   }
-  vector<int> size(n + 1, 0);
   vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+  vector<int> size(n + 1, 0);
   function<void(int)> Dfs = [&](int u) {
-    for (int id = h[u]; id != -1; id = ne[id]) {
-      int son = e[id];
-      Dfs(son);
-      vector<int> Cap(n + 1, -(int) 2e9);
+    vector<int> tmp(n + 1, -(int) 2e9);
+    for (int v : e[u]) {
+      Dfs(v);
       for (int i = 0; i <= size[u]; i++) {
-        for (int j = 0; j <= size[son]; j++) {
-          Cap[i + j] = max(Cap[i + j], dp[u][i] + dp[son][j]);
-          // dp[u][i + j] = max(dp[u][i + j], dp[u][i] + dp[son][j]);
-        }
+	      for (int j = 0; j <= size[v]; j++) {
+	        tmp[i + j] = max(tmp[i + j], dp[u][i] + dp[v][j]);
+	      }
       }
-      for (int it = 0; it <= size[u] + size[son]; it++) {
-        dp[u][it] = Cap[it];
+      size[u] += size[v];
+      for (int i = 0; i <= size[u]; i++) {
+        dp[u][i] = tmp[i];
       }
-      size[u] += size[son];
     }
     size[u] += 1;
     for (int i = size[u]; i >= 1; i--) {
