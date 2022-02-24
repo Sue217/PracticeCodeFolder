@@ -4,10 +4,10 @@ MyTinySTL/
 Web/
 .DS_Store
 *.bin
-*.cph
+.cph
 *.out
 modern-cpp-tutorial/
 test
 grpc/
-*.idea
-*.vscode
+.idea
+.vscode
