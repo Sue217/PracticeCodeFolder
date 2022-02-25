@@ -22,6 +22,7 @@
     "functional": "cpp",
     "iosfwd": "cpp",
     "ios": "cpp",
-    "array": "cpp"
+    "array": "cpp",
+    "map": "cpp"
   }
 }
