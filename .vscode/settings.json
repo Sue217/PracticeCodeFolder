@@ -23,6 +23,8 @@
     "iosfwd": "cpp",
     "ios": "cpp",
     "array": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "deque": "cpp",
+    "stack": "cpp"
   }
 }

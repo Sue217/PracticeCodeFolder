@@ -1,36 +1,29 @@
-/**
- *    author: subobo
- *    created: 25.02.2022 19:21:31
-**/
-#include <bits/stdc++.h>
+  /**
+   *    author: subobo
+   *    created: 25.02.2022 23:38:16
+  **/
+  #include <bits/stdc++.h>
 
-using namespace std;
+  using namespace std;
 
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(0);
-  int n;
-  cin >> n;
-  map<int, int> mp;
-  vector<int> a(n);
-  for (int i = 0; i < n; i++) {
-    cin >> a[i];
-    mp[a[i]] += 1;
-  }
-  sort(a.begin(), a.end());
-  int ma = *max_element(a.begin(), a.end());
-  int ans = 0;
-  for (int it : a) {
-    if (mp.count(it) == 0) {
-      continue;
+  int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int& in : a) {
+      cin >> in;
     }
-    int cnt = 0;
-    for (int k = it; k <= ma; k *= it) {
-      cnt += 1;
-      mp[k] = 0;
+    sort(a.begin(), a.end());
+    vector<int> dp(n, 1);
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < i; j++) {
+        if (a[i] % a[j] == 0) {
+          dp[i] = max(dp[i], dp[j] + 1);
+        }
+      }
     }
-    ans = max(ans, cnt);
+    cout << *max_element(dp.begin(), dp.end()) << '\n';
+    return 0;
   }
-  cout << ans << '\n';
-  return 0;
-}
