@@ -15,9 +15,9 @@ int main() {
   for (int id = 2; id <= n; id++) {
     int fa;
     cin >> fa;
-    e[fa].emplace_back(id);
+    e[fa].push_back(id);
   }
-  vector<long long> f(n + 1, 1), g(n + 1, 0), ans(n + 1, 0);
+  vector<long long> f(n + 1, 1), g(n + 1), ans(n + 1);
   function<void(int)> Dfs_1 = [&](int u) {
     for (auto v : e[u]) {
       Dfs_1(v);
@@ -25,11 +25,11 @@ int main() {
     }
   };
   function<void(int)> Dfs_2 = [&](int u) {
-    int has = (int) e[u].size();
-    if (has == 0) {
+    if (e[u].empty()) {
       return;
     }
-    vector<long long> pre(has + 2, 0), suf(has + 2, 0);
+    int has = (int) e[u].size();
+    vector<long long> pre(has + 2), suf(has + 2);
     pre[0] = 1;
     for (int i = 0; i < has; i++) {
       pre[i + 1] = pre[i] * (f[e[u][i]] + 1) % mod;
