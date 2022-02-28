@@ -25,6 +25,7 @@
     "array": "cpp",
     "map": "cpp",
     "deque": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "string": "cpp"
   }
 }
