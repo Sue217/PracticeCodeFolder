@@ -1,6 +1,5 @@
 C
 Python/
-MyTinySTL/
 Web/
 .DS_Store
 *.bin
@@ -8,6 +7,4 @@ Web/
 *.out
 modern-cpp-tutorial/
 test
-grpc/
 .idea
-.vscode
