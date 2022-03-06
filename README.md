@@ -1,4 +1,4 @@
-# Code for Practicing of Mine in the Winter Vacation 2022❄️
+# Code Practicing of Mine </>
 
 ![](https://summerofcode.withgoogle.com/assets/media/logo-sun.svg)
 
