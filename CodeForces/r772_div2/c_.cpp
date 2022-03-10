@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 08.03.2022 21:23:09
+ *    created: 09.03.2022 10:42:18
 **/
 #include <bits/stdc++.h>
 
@@ -18,12 +18,12 @@ int main() {
     for (int i = 1; i <= n; i++) {
       cin >> a[i];
     }
-    if (a[n] < a[n - 1]) {
-      puts("-1");
+    if (a[n - 1] > a[n]) {
+      cout << -1 << '\n';
       continue;
     }
     bool ok = true;
-    vector<array<int, 3>> s;
+    vector<pair<int, int>> op;
     for (int i = n - 2; i >= 1; i--) {
       if (a[i] > a[i + 1]) {
         a[i] = a[i + 1] - a[n];
@@ -31,19 +31,16 @@ int main() {
           ok = false;
           break;
         }
-        s.push_back({i, i + 1, n});
+        op.emplace_back(i, i + 1);
       }
     }
     if (ok) {
-      cout << s.size() << '\n';
-      for (auto i : s) {
-        for (int j : i) {
-          cout << j << " ";
-        }
-        cout << '\n';
+      cout << op.size() << '\n';
+      for (auto it : op) {
+        cout << it.first << " " << it.second << " " << n << '\n';
       }
     } else {
-      puts("-1");
+      cout << -1 << '\n';
     }
   }
   return 0;

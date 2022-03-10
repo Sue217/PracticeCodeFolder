@@ -44,6 +44,8 @@
     "unordered_set": "cpp",
     "valarray": "cpp",
     "*.inc": "cpp",
-    "random": "cpp"
+    "random": "cpp",
+    "bitset": "cpp",
+    "chrono": "cpp"
   }
 }
