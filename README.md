@@ -12,7 +12,7 @@
 
 4. ### ncut_training: Winter training of my college for contests(from PTA).
 
-5. ### subobos_algo_template: Some algorithm templates which I learned (Most of them may come from [tourist](https://codeforces.com/profile/tourist)).
+5. ### subobos_algo_template: Some algorithm templates I learned (Most may come from [tourists](https://codeforces.com/profile/tourist)).
 
 6. ### [usaco_training](https://train.usaco.org/): Practices of USACO Training.
 
@@ -20,6 +20,8 @@
 
 8. ### VP_WC2022: Short for Virtual Participation for Winter training Camp in 2022.
 
-6. ### [daimayuan](http://oj.daimayuan.top/): A new Chinese OJ built by some brilliant teachers such as [dls](https://codeforces.com/profile/MiracleFaFa) and [wls](https://codeforces.com/profile/shengtongtong), it may be a good choice for people who are preparing XCPC.
+9. ### [daimayuan](http://oj.daimayuan.top/): A new Chinese OJ built by some brilliant teachers such as [dls](https://codeforces.com/profile/MiracleFaFa) and [wls may be a good choice for preparing \`XCPC`.
+
+6. ### LanQiaoCup: Some exercises for Chinese "Famous" college students programming competition which is called \`LanXiangBei`.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Vimlogo.svg/1200px-Vimlogo.svg.png)
