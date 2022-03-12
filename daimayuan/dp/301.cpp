@@ -6,16 +6,6 @@
 
 using namespace std;
 
-#define LOCAL
-
-void debug_out() { cerr << endl; }
-
-template <typename Head, typename... Tail>
-void debug_out(Head H, Tail... T) {
-  cerr << " " << H;
-  debug_out(T...);
-}
-
 #ifdef LOCAL
 #define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
 #else
@@ -33,19 +23,28 @@ int main() {
       cin >> a;
       s.push_back(a + s.back());
     }
-    constexpr int inf = (int) 2e9;
-    vector<vector<int>> dp(n + 1, vector<int>(n + 1));
-    for (int len = L; len <= R; len++) {
-      for (int l = 1; l + len - 1 <= n; l++) {
-        int r = l + len - 1;
-        dp[l][r] = inf;
-        for (int m = l; m < r; m++) {
-          dp[l][r] = min(dp[l][r], dp[l][m] + dp[m + 1][r] + s[r] - s[l - 1]);
+    constexpr int inf = (int) 1e9;
+    vector<vector<vector<int>>> dp(n + 1, vector<vector<int>>(n + 1, vector<int>(n + 1, inf)));
+    for (int len = 0; len <= n; len++) {
+      for (int l = 1; l + len <= n; l++) {
+        int r = l + len;
+        if (l == r) {
+          dp[l][r][1] = 0;
+          continue;
         }
+        for (int p = 2; p <= n; p++) {
+          for (int m = l; m < r; m++) {
+            dp[l][r][p] = min(dp[l][r][p], dp[l][m][1] + dp[m + 1][r][p - 1]);
+          }
+          if (L <= p && p <= R) {
+            dp[l][r][1] = min(dp[l][r][p], dp[l][r][1]);
+          }
+        }
+        dp[l][r][1] += s[r] - s[l - 1];
       }
     }
-    // debug(dp[1][n]);
-    cout << (dp[1][n] == inf ? 0 : dp[1][n]) << '\n';
+    int ans = dp[1][n][1];
+    cout << (ans >= inf ? 0 : ans) << '\n';
   }
   return 0;
 }
