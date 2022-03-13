@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 12.03.2022 14:48:46
+ *    created: 13.03.2022 08:32:09
 **/
 #include <bits/stdc++.h>
 
@@ -17,26 +17,20 @@ int main() {
   cin.tie(0);
   int n, m;
   cin >> n >> m;
-  string s = "0";
-  for (int i = 0; i < m; i++) {
-    s += '1';
-  }
-  vector<bool> dp(m + 1);
-  dp[0] = 1;
-  for (int i = 0; i < n; i++) {
+  vector<vector<int>> dp(n + 1, vector<int>(m + 1));
+  dp[0][0] = 1;
+  for (int i = 1; i <= n; i++) {
     int a, b;
     cin >> a >> b;
-    for (int j = m; j >= 0; j--) {
-      if (j - a >= 0) {
-        dp[j - a] = 1;
-      }
-      if (j - b >= 0) {
-        dp[j - b] = 1;
+    for (int j = 0; j <= m; j++) {
+      if (dp[i - 1][j] == 1) {
+        dp[i][j + a] = 1;
+        dp[i][j + b] = 1;
       }
     }
   }
   for (int i = 0; i <= m; i++) {
-    cout << !dp[i];
+    cout << dp[n][i];
   }
   cout << '\n';
   return 0;

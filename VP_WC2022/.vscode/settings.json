@@ -17,6 +17,8 @@
     "*.HLA*": "hlasm",
     "algorithm": "cpp",
     "ios": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "random": "cpp",
+    "regex": "cpp"
   }
 }
