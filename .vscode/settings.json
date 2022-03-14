@@ -46,6 +46,12 @@
     "*.inc": "cpp",
     "random": "cpp",
     "bitset": "cpp",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "locale": "cpp",
+    "__locale": "cpp",
+    "__string": "cpp",
+    "fstream": "cpp",
+    "iomanip": "cpp",
+    "ostream": "cpp"
   }
 }

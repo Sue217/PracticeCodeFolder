@@ -1,0 +1,216 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"contest": {
+		"prefix": "test",
+		"body": [
+			"/**",
+			" *    author: subobo",
+			" *    created: $CURRENT_DATE.$CURRENT_MONTH.$CURRENT_YEAR $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+			"**/",
+			"#include <bits/stdc++.h>",
+			"",
+			"using namespace std;",
+			"",
+      "#ifdef LOCAL",
+      "#define debug(...) cerr << \"[\" << #__VA_ARGS__ << \"]:\", debug_out(__VA_ARGS__)",
+      "#else",
+      "#define debug(...) 42",
+      "#endif",
+      "",
+			"int main() {",
+			"  ios::sync_with_stdio(false);",
+			"  cin.tie(0);",
+			"  return 0;",
+			"}",
+		],
+		"description": "Log output to console"
+	},
+	"cplusplus": {
+		"prefix": "cpp",
+		"body": [
+			"/**",
+			" *    author: Jingbo Su",
+			" *    created: $CURRENT_MONTH_NAME/$CURRENT_DATE/$CURRENT_YEAR $CURRENT_DAY_NAME",
+			"**/",
+			"#include <iostream>",
+			"",
+			"int main() {",
+			"  return 0;",
+			"}",
+		],
+		"description": "Log output to console"
+	},
+	"usaco": {
+		"prefix": "usaco",
+		"body": [
+			"/*",
+			"  ID: sujingb1",
+			"  TASK: test",
+			"  LANG: C++17",
+			"*/",
+			"#include <bits/stdc++.h>",
+			"",
+			"using namespace std;",
+			"",
+			"int main() {",
+			"  ifstream fin (\"test.in\");",
+			"  ofstream fout (\"test.out\");",
+			"  return 0;",
+			"}",
+		],
+		"description": "Log output to console"
+	},
+  "read": {
+    "prefix": "read",
+    "body": [
+      "",
+      "template<typename T>",
+      "inline void read (T& v) {",
+      "  v = 0;",
+      "  char c = getchar();",
+      "  while (c < '0' || c > '9') {",
+      "    c = getchar();",
+      "  }",
+      "  while (c >= '0' && c <= '9') {",
+      "    v = (v << 1) + (v << 3) + (c ^ 48);",
+      "    c = getchar();",
+      "  }",
+      "}",
+      "",
+      "template<typename T, typename... A>",
+      "inline void read(T& v, A&... args) {",
+      "  read(v);",
+      "  read(args...);",
+      "}"
+    ],
+		"description": "Log output to console"
+  },
+  "dsu": {
+    "prefix": "dsu",
+    "body": [
+      "",
+      "class dsu {",
+      " public:",
+      "  vector<int> p; // d, sz",
+      "  int n;",
+      "",
+      "  dsu(int _n) : n(_n) {",
+      "    p.resize(n);",
+      "    iota(p.begin(), p.end(), 0);",
+      "    // d.resize(n);",
+      "    // sz.assign(n, 1);",
+      "  }",
+      "",
+      "  inline int get(int x) {",
+      "    return (x == p[x] ? x : (p[x] = get(p[x])));",
+      "    // if (x != p[x]) {",
+      "    //   int root = get(p[x]);",
+      "    //   d[x] += d[p[x]];",
+      "    //   p[x] = root;",
+      "    // }",
+      "    // return p[x];",
+      "  }",
+      "",
+      "  inline bool unite(int x, int y) {",
+      "    x = get(x);",
+      "    y = get(y);",
+      "    if (x != y) {",
+      "      p[x] = y;",
+      "      return true;",
+      "    }",
+      "    return false;",
+      "  }",
+      "",
+      "  // dist = abs(d[x] - d[y])...",
+      "};",
+      ""
+    ]
+  },
+  "fenwick": {
+    "prefix": "fenwick",
+    "body": [
+      "",
+      "template<typename T>",
+      "class fenwick {",
+      " public:",
+      "  vector<T> fenw; // psum",
+      "  int n;",
+      "",
+      "  fenwick(int _n) : n(_n) {",
+      "    fenw.resize(n);",
+      "    // psum.resize(n);",
+      "  }",
+      "",
+      "  inline void modify(int x, T v) {",
+      "    for (int i = x; i <= n; i += (i & -i)) {",
+      "      fenw[i] += v;",
+      "      // psum[i] += 1ll * x * v;",
+      "    }",
+      "  }",
+      "",
+      "  inline T get(int x) {",
+      "    T v{}; // u{}",
+      "    for (int i = x; i >= 1; i -= (i & -i)) {",
+      "      v += fenw[i];",
+      "      // u += psum[i];",
+      "    }",
+      "    return v;",
+      "    // return v * (x + 1) - u;",
+      "  }",
+      "",
+      "  inline void make(int n) {",
+      "    for (int i = 1; i <= n; i++) {",
+      "      fenw[i] = (i & -i);",
+      "    }",
+      "  }",
+      "",
+      "  inline void set(int _n, T v) {",
+      "    fenw.assign(_n, v);",
+      "  }",
+      "};",
+      ""
+    ]
+  },
+  "private": {
+    "prefix": "private",
+    "body": [
+      " private:",
+      "  "
+    ]
+  },
+  "public": {
+    "prefix": "public",
+    "body": [
+      " public:",
+      "  "
+    ]
+  },
+  "debug": {
+    "prefix": "debug",
+    "body": [
+      "",
+      "#define LOCAL",
+      "",
+      "void debug_out() { cerr << endl; }",
+      "",
+      "template <typename Head, typename... Tail>",
+      "void debug_out(Head H, Tail... T) {",
+      "  cerr << \" \" << H;",
+      "  debug_out(T...);",
+      "}",
+      ""
+    ]
+  }
+}
