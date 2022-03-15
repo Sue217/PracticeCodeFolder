@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 14.03.2022 20:43:05
+ *    created: 15.03.2022 09:11:05
 **/
 #include <bits/stdc++.h>
 
@@ -27,42 +27,32 @@ int main() {
   cin.tie(0);
   int n;
   cin >> n;
-  vector<vector<pair<int, int>>> g(n + 1);
-  int root = -1;
-  vector<bool> pr(n + 1);
-  for (int i = 1; i <= n; i++) {
+  vector<vector<int>> g(n + 1);
+  for (int i = 0; i < n - 1; i++) {
     int u, v, w;
     cin >> u >> v >> w;
-    g[u].emplace_back(v, w);
-    g[v].emplace_back(u, w);
-    pr[v] = true;
+    g[u].push_back(v);
+    g[v].push_back(u);
   }
   long long ans = 0;
   function<long long(int, int)> Dfs = [&](int v, int pv)->long long {
-    long long cnt = 0, d = 0;
-    for (auto p : g[v]) {
-      int u = p.first;
+    long long x = 0, y = 0;
+    for (int u : g[v]) {
       if (u == pv) {
         continue;
       }
-      long long s = Dfs(u, v);
-      ans += d * s;
-      d += cnt * s;
-      cnt += s;
-      // debug(v, cnt, d);
+      long long z = Dfs(u, v);
+      ans += y * z;
+      y += x * z;
+      x += z;
     }
-    if (cnt + 1 < n) {
-      ans += d * (n - (cnt + 1));
+    if (x + 1 < n) {
+      ans += y * (n - x - 1);
     }
-    return cnt + 1;
+    // debug(v, x, y, ans);
+    return x + 1;
   };
-  for (int i = 1; i <= n; i++) {
-    if (!pr[i]) {
-      root = i;
-      break;
-    }
-  }
-  Dfs(root, 0);
+  Dfs(1, 0);
   cout << ans << '\n';
   return 0;
 }
