@@ -183,20 +183,6 @@
       ""
     ]
   },
-  "private": {
-    "prefix": "private",
-    "body": [
-      " private:",
-      "  "
-    ]
-  },
-  "public": {
-    "prefix": "public",
-    "body": [
-      " public:",
-      "  "
-    ]
-  },
   "debug": {
     "prefix": "debug",
     "body": [
@@ -209,6 +195,28 @@
       "void debug_out(Head H, Tail... T) {",
       "  cerr << \" \" << H;",
       "  debug_out(T...);",
+      "}",
+      ""
+    ]
+  },
+  "random": {
+    "prefix": "random",
+    "body": "mt19937 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().count());"
+  },
+  "fastpower": {
+    "prefix": "fastpow",
+    "body": [
+      "",
+      "template <typename T, typename U>",
+      "inline T pow(const T& a, const T& b, const U& mod) {",
+      "  assert(b >= 0);",
+      "  T x = a, p = b, ans = 1;",
+      "  while (p > 0) {",
+      "    if (p & 1) ans = ans * x % mod;",
+      "    x = x * x % mod;",
+      "    p >>= 1;",
+      "  }",
+      "  return ans % mod;",
       "}",
       ""
     ]

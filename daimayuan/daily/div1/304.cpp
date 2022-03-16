@@ -6,16 +6,6 @@
 
 using namespace std;
 
-#define LOCAL
-
-void debug_out() { cerr << endl; }
-
-template <typename Head, typename... Tail>
-void debug_out(Head H, Tail... T) {
-  cerr << " " << H;
-  debug_out(T...);
-}
-
 #ifdef LOCAL
 #define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
 #else
@@ -51,7 +41,7 @@ int main() {
         if (it == 0) {
           ++cnt;
         } else {
-          for (int p = 2; p <= it / p; p++) {
+          for (int p = 1; p <= it / p; p++) {
             if (it % p == 0) {
               s.insert(p);
               s.insert(it / p);
@@ -60,6 +50,7 @@ int main() {
         }
       }
       if (n / 2 <= cnt) {
+        ans = -1;
         break;
       }
       for (auto it = s.rbegin(); it != s.rend(); it++) {
