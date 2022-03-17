@@ -52,6 +52,8 @@
     "__string": "cpp",
     "fstream": "cpp",
     "iomanip": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "cstdio": "cpp",
+    "complex": "cpp"
   }
 }
