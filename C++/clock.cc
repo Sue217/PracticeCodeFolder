@@ -21,10 +21,8 @@ int main()
     auto t_start = std::chrono::high_resolution_clock::now();
     std::thread t1(f);
     std::thread t2(f); // f() is called on two threads
-    std::thread t3(f);
     t1.join();
     t2.join();
-    t3.join();
     std::clock_t c_end = std::clock();
     auto t_end = std::chrono::high_resolution_clock::now();
  
