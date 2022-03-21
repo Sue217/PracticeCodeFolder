@@ -1,13 +1,19 @@
 /**
  *    author: subobo
- *    created: 20.01.2022 11:46:15
+ *    created: 21.03.2022 14:30:36
 **/
 #include <bits/stdc++.h>
 
 using namespace std;
 
-template<typename T>
-class fenwick{
+#ifdef LOCAL
+#define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
+#else
+#define debug(...) 42
+#endif
+
+template <typename T>
+class fenwick {
  public:
   vector<T> fenw;
   int n;
@@ -16,24 +22,20 @@ class fenwick{
     fenw.resize(n);
   }
 
-  inline void modify(int x, T v) {
-    for (int i = x; i <= n; i += (i & -i)) {
-      fenw[i] += v;
+  void modify(int x, T v) {
+    while (x < n) {
+      fenw[x] += v;
+      x |= (x + 1);
     }
   }
 
-  inline T get(int x) {
+  T get(int x) {
     T v{};
-    for (int i = x; i >= 1; i -= (i & -i)) {
-      v += fenw[i];
+    while (x >= 0) {
+      v += fenw[x];
+      x = (x & (x + 1)) - 1;
     }
     return v;
-  }
-
-  inline void init(int n) {
-    for (int i = 1; i <= n; i++) {
-      fenw[i] = (i & -i);
-    }
   }
 };
 
@@ -42,28 +44,33 @@ int main() {
   cin.tie(0);
   int n;
   cin >> n;
-  vector<int> h(n + 1);
-  for (int i = 2; i <= n; i++) {
-    cin >> h[i];
+  fenwick<long long> fenw(n + 4);
+  for (int i = 1; i <= n; i++) {
+    fenw.modify(i, +1);
   }
-  fenwick<int> fenw(n + 3);
-  fenw.init(n + 1);
-  vector<int> ans(n + 1);
+  vector<int> a(n + 1);
+  a[1] = 1;
+  for (int i = 2; i <= n; i++) {
+    cin >> a[i];
+    a[i] += 1;
+  }
+  vector<int> order;
   for (int i = n; i >= 1; i--) {
-    int l = 1, r = n;
-    while (l < r) {
-      int md = (l + r) >> 1;
-      if (fenw.get(md) >= h[i] + 1) {
-        r = md;
+    int low = 0, high = n;
+    while (high - low > 1) {
+      int mid = (low + high) >> 1;
+      if (fenw.get(mid) >= a[i]) {
+        high = mid;
       } else {
-        l = md + 1;
+        low = mid;
       }
     }
-    ans[i] = r;
-    fenw.modify(r, -1);
+    order.push_back(high);
+    fenw.modify(high, -1);
   }
-  for (int i = 1; i <= n; i++) {
-    cout << ans[i] << '\n';
+  reverse(order.begin(), order.end());
+  for (int i = 0; i < n; i++) {
+    cout << order[i] << '\n';
   }
   return 0;
 }

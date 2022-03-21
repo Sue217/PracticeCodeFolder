@@ -1,34 +1,44 @@
 /**
  *    author: subobo
- *    created: 20.01.2022 10:30:38
+ *    created: 21.03.2022 12:05:57
 **/
 #include <bits/stdc++.h>
 
 using namespace std;
 
+#ifdef LOCAL
+#define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
+#else
+#define debug(...) 42
+#endif
+
 template <typename T>
 class fenwick {
  public:
-  vector<T> fenw, psum;
+  vector<T> fenw, p;
   int n;
 
   fenwick(int _n) : n(_n) {
     fenw.resize(n);
-    psum.resize(n);
+    p.resize(n);
   }
 
-  inline void modify(int x, T v) {
-    for (int i = x; i <= n; i += (i & -i)) {
-      fenw[i] += v;
-      psum[i] += 1ll * x * v;
+  void modify(int x, T v) {
+    T u = (T) x * v;
+    while (x < n) {
+      fenw[x] += v;
+      p[x] += u;
+      x |= (x + 1);
     }
   }
 
-  inline T get(int x) {
+  T get(int x) {
     T v{}, u{};
-    for (int i = x; i >= 1; i -= (i & -i)) {
-      v += fenw[i];
-      u += psum[i];
+    int y = x;
+    while (y >= 0) {
+      v += fenw[y];
+      u += p[y];
+      y = (y & (y + 1)) - 1;
     }
     return v * (x + 1) - u;
   }
@@ -37,26 +47,23 @@ class fenwick {
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
-  int n, m;
-  cin >> n >> m;
-  vector<int> seq(n + 1);
+  int n, q;
+  cin >> n >> q;
+  fenwick<long long> fenw(n + 4);
+  vector<long long> a(n + 1);
   for (int i = 1; i <= n; i++) {
-    cin >> seq[i];
+    cin >> a[i];
+    fenw.modify(i, a[i] - a[i - 1]);
   }
-  fenwick<long long> fenw(n + 3);
-  for (int i = 1; i <= n; i++) {
-    fenw.modify(i, seq[i] - seq[i - 1]);
-  }
-  for (int i = 0; i < m; i++) {
+  while (q--) {
     char op;
     cin >> op;
     if (op == 'C') {
-      int l, r;
-      long long d;
+      int l, r, d;
       cin >> l >> r >> d;
-      fenw.modify(l, d);
+      fenw.modify(l, +d);
       fenw.modify(r + 1, -d);
-    } else
+    }
     if (op == 'Q') {
       int l, r;
       cin >> l >> r;
