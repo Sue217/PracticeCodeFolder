@@ -1,10 +1,16 @@
 /**
  *    author: subobo
- *    created: 19.01.2022 20:58:32
+ *    created: 20.03.2022 15:22:20
 **/
 #include <bits/stdc++.h>
 
 using namespace std;
+
+#ifdef LOCAL
+#define debug(...) cerr << "[" << #__VA_ARGS__ << "]:", debug_out(__VA_ARGS__)
+#else
+#define debug(...) 42
+#endif
 
 template <typename T>
 class fenwick {
@@ -16,24 +22,20 @@ class fenwick {
     fenw.resize(n);
   }
 
-  inline void modify(int x, T v) {
-    while (x <= n) {
+  void modify(int x, T v) {
+    while (x < n) {
       fenw[x] += v;
-      x += (x & -x);
+      x |= (x + 1);
     }
   }
 
-  inline T get(int x) {
+  T get(int x) {
     T v{};
-    while (x >= 1) {
+    while (x >= 0) {
       v += fenw[x];
-      x -= (x & -x);
+      x = (x & (x + 1)) - 1;
     }
     return v;
-  }
-
-  void remake(int _n, T v) {
-    fenw.assign(_n, v);
   }
 };
 
@@ -42,22 +44,23 @@ int main() {
   cin.tie(0);
   int n;
   cin >> n;
-  vector<int> y(n + 1);
-  for (int i = 1; i <= n; i++) {
+  fenwick<long long> fenw(n + 1);
+  vector<int> y(n);
+  for (int i = 0; i < n; i++) {
     cin >> y[i];
   }
-  fenwick<long long> fenw(n + 1);
-  vector<long long> V(n + 1), A(n + 1);
-  for (int i = 1; i <= n; i++) {
+  vector<long long> V(n), A(n);
+  long long ans1 = 0, ans2 = 0;
+  for (int i = 0; i < n; i++) {
     V[i] = fenw.get(n) - fenw.get(y[i]);
     A[i] = fenw.get(y[i] - 1);
     fenw.modify(y[i], 1);
   }
-  fenw.remake(n + 1, 0);
-  long long ans1 = 0, ans2 = 0;
-  for (int i = n; i >= 1; i--) {
-    ans1 += V[i] * (long long) (fenw.get(n) - fenw.get(y[i]));
-    ans2 += A[i] * (long long) fenw.get(y[i] - 1);
+  fenw.fenw.clear();
+  fenw.fenw.resize(n + 1);
+  for (int i = n - 1; i >= 0; i--) {
+    ans1 += V[i] * (fenw.get(n) - fenw.get(y[i]));
+    ans2 += A[i] * (fenw.get(y[i] - 1));
     fenw.modify(y[i], 1);
   }
   cout << ans1 << " " << ans2 << '\n';

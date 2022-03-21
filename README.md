@@ -14,13 +14,13 @@
 
 5. ### subobos_algo_template: Some algorithm templates I learned (Most may come from [tourists](https://codeforces.com/profile/tourist)).
 
-6. ### [usaco_training](https://train.usaco.org/): Practices of USACO Training.
+6. ### [USACO](https://train.usaco.org/): Training in USACO.
 
 7. ### [AtCoder](https://atcoder.jp/): A great Japanese Online Judge and I join in some contests sometimes~.
 
-8. ### VP_WC2022: Short for Virtual Participation for Winter training Camp in 2022.
+8. ### Competition: Other competitions.
 
-9. ### [daimayuan](http://oj.daimayuan.top/): A new Chinese OJ built by some brilliant teachers such as [dls](https://codeforces.com/profile/MiracleFaFa) and [wls may be a good choice for preparing \`XCPC`.
+9. ### [daimayuan](http://oj.daimayuan.top/): A new Chinese OJ built by some brilliant teachers such as [dls](https://codeforces.com/profile/MiracleFaFa) and [wls](https://codeforces.com/profile/littlelittlehorse) may be a good choice for preparing \`XCPC`.
 
 6. ### LanQiaoCup: Some exercises for Chinese "Famous" college students programming competition which is called \`LanXiangBei`.
 
