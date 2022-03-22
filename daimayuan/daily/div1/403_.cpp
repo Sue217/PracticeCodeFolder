@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 21.03.2022 23:13:31
+ *    created: 21.03.2022 21:02:06
 **/
 #include <bits/stdc++.h>
 
@@ -25,12 +25,13 @@ int main() {
     cnt[x] += 1;
   }
   int ans = 0;
-  for (int i = 1; i <= N; i++) {
-    for (int j = i; j <= N; j += i) {
-      int delta = j / i - i;
-      if (delta >= 0 && delta % 2 == 0) {
-        ans += cnt[delta / 2] * cnt[j];
+  for (int x = 1; x <= N; x++) {
+    for (int y = x + 1; y <= N; y++) {
+      int ai = x, aj = y * y - x * x;
+      if (aj > N) {
+        break;
       }
+      ans += cnt[ai] * cnt[aj];
     }
   }
   cout << ans << '\n';
