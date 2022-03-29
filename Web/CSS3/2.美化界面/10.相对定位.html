@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相对定位</title>
+    <!-- 相对定位position:relative 相对于自己原来的位置进行偏移
+    相对于原来位置(父元素)移动,元素使用此属性仍在文档流中,不影响其他元素布局 -->
+    <style>
+        div{
+            margin: 10px;
+            padding: 5px;
+            font-size: 12px;
+            line-height: 25px;
+        }
+        #father{
+            background-color: burlywood;
+            border: 2px solid hsl(182, 25%, 50%);
+            /* position: relative; */
+            /* 相对定位:top bottom left right */
+        }
+        #first{
+            background-color: coral;
+            border: 2px solid rosybrown;
+            position: relative;
+            top: 10px;
+            left: 10px;
+        }
+        #second{
+            background-color: cyan;
+            border: 2px solid blueviolet;
+            position: relative;
+            top: -20px;
+            left: -20px;
+        }
+        #third{
+            background-color: forestgreen;
+            border: 2px solid green;
+            position: relative;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="father">
+        <div id="first">BOX NO.1</div>
+        <div id="second">BOX NO.2</div>
+        <div id="third">BOX NO.3</div>
+    </div>
+    <ol>
+        <li>first : top: 10px ; left: 10px;</li>
+        <li>second : top: -20px ; left: -20px;</li>
+        <li>third : bottom: 10px ; right: 10px;</li>
+    </ol>
+</body>
+</html>

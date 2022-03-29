@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A title</title>
+    <!-- 规范 style可以写css -->
+    <!-- {代码块(声明1;2;3;)}css选择器 精准定位 -->
+
+    <!-- 内部样式 -->
+    <style>
+        /* 标签选择器会选中页面所有该种标签的元素 */
+        h1{
+            color: blue;
+        }
+    </style>
+    <!-- 语法 -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+    <!-- <h1>I AM A TITLE</h1> -->
+    <!-- 行内样式:在标签中编写style属性 不好一般不采用 -->
+    <h1 style="color: red">I AM A TITLE</h1>
+    <p>
+        In summary:css导入方式:<br>
+        行内样式、内部样式、外部样式<hr>
+        优先级顺序:就近(覆盖原则) < 行内样式<br>
+        外部样式导入的两种写法:
+    </p>
+    <ul>
+        <li>链接式:link rel</li>
+        <li>导入式:@import css2.1特有的</li>
+    </ul>
+</body>
+</html>

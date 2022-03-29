@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>边框圆角</title>
+    <style>
+        body{
+            background-color: cornflowerblue;
+        }
+        div{
+            height: 300px;
+            width: 300px;
+            border: 6px solid crimson;
+            /* border-radius:(左上↖️右下↘️)(右上↗️左下↙️)顺时针排
+            圆角 = 半径 + 边框 */
+            border-radius: 50px 20px;
+
+            /* 阴影:右 下 虚 */
+            box-shadow: 10px 10px 100px yellow;
+        }
+        img{
+            /* 圆形⭕️头像 */
+            border-radius: 10000px 10000px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <p style="display: block;width: auto;text-align: center;">
+        <img src="../../resources/img/Apple.jpeg">
+    </p>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOBLT's Registration Page</title>
+</head>
+<body>
+    <h1>Sign In</h1>
+    <form action="" method="POST">
+        <p>Username
+            <input type="text" name="name" placeholder="Please input your name" maxlength=16 size=18 required>
+        </p><br>
+        <p>Password
+            <input type="password" name="pwd" placeholder="Please input your password" size="21" required>
+        </p><br>
+        <p>Gender
+            <input type="radio" name="gender" required>Male
+            <input type="radio" name="gender" required>Female
+        </p><br>
+        <p>Birthday
+            <input type="datetime" name="birthday" value="2000-01-01" placeholder="Please input your birthday" required>
+        </p>
+        <p>Age
+            <input type="number" name="number" value="18" min="0" step="1" required>
+        </p>
+        <p>Nationality
+            <select name="Country">
+                <option value="country">China</option>
+                <option value="country">America</option>
+                <option value="country">Britian</option>
+                <option value="country">France</option>
+                <option value="country">Russia</option>
+            </select>
+        </p><br><hr>
+        <p>Hobby
+            <textarea cols="50" rows=10 placeholder="What hobbies do you have"></textarea>
+        </p><br>
+        <p>E-mail
+            <input type="email" name="email" placeholder="Please your e-mail address" size="21" pattern="" required>
+        </p><br>
+        <p>URL
+            <input type="url" name="url" placeholder="If you have your own URL,please input" size="29">
+        </p><br>
+
+        <p>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </p>
+    </form>
+</body>
+</html>

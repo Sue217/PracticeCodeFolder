@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        a{
+            text-decoration-line: none;
+        }
+        /* 未访问链接 */
+        apple:link{
+            color: tan;
+        }
+        /* 鼠标悬浮状态 */
+        apple:hover{
+            color: skyblue;
+            size: 100px;
+        }
+        /* 鼠标按住(激活)状态 */
+        apple:active{
+            color: tomato;
+        }
+        /* 已访问链接 */
+        apple:visited{
+            color: violet;
+        }
+        #CEO{
+            /* 阴影 阴影颜色 水平偏移 垂直偏移 阴影半径 */
+            text-shadow: teal 10px 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#">
+        <img src="../../resources/img/Apple.jpeg" alt="Apple" title="Apple">
+    </a>
+    <p class="apple">
+        Company:<br>
+        <a href="">Apple Inc.</a><br>
+    </p>
+    <p id="CEO">
+        CEO:<br>
+        <a href="">Tim Cook</a>
+    </p>
+</body>
+</html>

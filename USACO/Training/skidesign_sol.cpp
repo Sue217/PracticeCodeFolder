@@ -12,23 +12,23 @@ int main() {
   ofstream fout ("skidesign.out");
   int n;
   fin >> n;
-  vector<int> hill(n, 0);
-  for (int& in : hill) {
-    fin >> in;
+  vector<int> a(n);
+  for (int i = 0; i < n; i++) {
+    fin >> a[i];
   }
-  long long ans = (long long) 2e18;
-  for (int l = 1; l <= 83; l++) {
-    int r = l + 17;
-    long long tot = 0;
-    for (int it : hill) {
-      if (it < l) {
-        tot += (l - it) * (l - it);
+  int ans = (int) 2e9;
+  for (int low = 0; low + 17 <= 100; low++) {
+    int high = low + 17;
+    int tax = 0;
+    for (int i = 0; i < n; i++) {
+      if (a[i] < low) {
+        tax += (int) pow(low - a[i], 2);
       } else
-      if (it > r) {
-        tot += (it - r) * (it - r);
+      if (high < a[i]) {
+        tax += (int) pow(a[i] - high, 2);
       }
     }
-    ans = min(ans, tot);
+    ans = min(ans, tax);
   }
   fout << ans << '\n';
   return 0;

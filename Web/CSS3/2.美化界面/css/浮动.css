@@ -1,0 +1,31 @@
+/* inline:行内元素 block:块元素 inline-block:是块元素但可内连(行内) none:隐藏  */
+div{
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    border: 2px solid red;
+    background-color: lightgoldenrodyellow;
+    margin: 0 auto;
+    /* clear: both; */
+    /* clear:both两侧不允许有浮动元素 right右侧 left左侧 none */
+}
+img{
+    float:left;
+    border-radius: 100px 100px;
+}
+#father{
+    content: "";
+    display: block;
+    clear: both;
+}
+span{
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    border: 2px solid red;
+    background-color: lightpink;
+}
+p ol li{
+    font-size: 150px;
+}
+    

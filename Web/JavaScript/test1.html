@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web app lifecycle</title>
+    <style>
+        #first{
+            color: aqua;
+        }
+        #second{
+            color: coral;
+        }
+    </style>
+</head>
+<body>
+    <ul id="first"> </ul>
+
+    <script>
+        function addMessage(element,message){//定义一个用于向一个元素增加一条信息的函数
+            var messageElement = document.createElement("li");
+            messageElement.textContent = message;
+            element.appendChild(messageElement);
+        }
+        var first = document.getElementById("first");
+        addMessage(first,"Page loading");
+    </script>
+
+    <ul id="second"> </ul>
+
+    <script>
+        document.body.addEventListener("mousemove",function(){//为body附上鼠标移动事件处理函数
+            var second = document.getElementById("second");
+            addMessage(second,"Event:mousemove");
+        });
+
+        document.body.addEventListener("click",function(){//为body附上鼠标点击事件处理函数
+            var second = document.getElementById("second");
+            addMessage(second,"Event:click");
+        });
+    </script>
+
+</body>
+</html>

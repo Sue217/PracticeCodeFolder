@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页设计</title>
+    <style>
+        body{
+            /* margin:外边框padding:内边框 */
+            margin: 0;
+            padding: 0;
+            text-decoration-line: none;
+        }
+        h2{
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 50px;
+            text-indent: 1.5em;
+            background-color: coral;
+            background-size: contain;
+        }
+        #box{
+            width: 450px;
+            height: 233√px;
+            /* 粗细 样式(solid dashed) 颜色 */
+            border: 3px dashed rgb(230, 5, 5);
+            border-radius: 10px;
+            /* margin:top right bottom left||(topbottom) (leftright) */
+            margin: 80px auto;
+            
+        }
+        
+        /* span{
+            font-size: 15px;
+            text-indent: 1.5em;
+        } */
+
+        .name{
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .psd{
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .mail{
+            margin-top: 15px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        input:nth-of-type(1){
+            /* Username */
+            border: 3px solid cadetblue;
+            border-radius: 10px;
+            text-indent: 1.5em;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="box">
+        <h2>VIP Log in</h2>
+        <form action="#">
+            <label class="name">
+                <span>Username</span>
+                <input type="text">
+            </label><br>
+            <label class="psd">
+                <span>Password</span>
+                <input type="password">
+            </label><br>
+            <label class="mail">
+                <span>E-mail</span>
+                <input type="text">
+            </label><br>
+        </form>
+    </div>
+        <!-- 盒子计算式:
+        元素大小:margin + border + padding + 内容宽度 -->
+</body>
+</html>

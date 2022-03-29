@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结构尾类选择器</title>
+    <!-- 避免使用class id选择器 -->
+    <style>
+        /* 选择ul第一个子元素 */
+        ul li:first-child{
+            background-color: cornsilk;
+        }
+        /* 选择ul最后一个子元素 */
+        ul li:last-child{
+            background-color: crimson;
+        }
+        /* 选择p1元素 */
+        /* nth-child():定位到父元素选择当前第一个元素 按顺序选择
+        选择p元素的父级元素 选中父级元素第一个 还要是当前元素才行(body下第一个不是p 就选不中) */
+        p:nth-child(1){
+            background-color: saddlebrown;
+        }
+        /* 选中父元素 下p元素的第一个 按类型选择 */
+        p:nth-of-type(1){
+            background-color: salmon;
+        }
+        a:hover{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    
+    <a href="">Hover</a>
+    <h1>H1</h1>
+    <p>Number 1</p>
+    <p>Number 2</p>
+    <p>Number 3</p>
+    <ul>
+        <li>Elem 01</li>
+        <li>Elem 02</li>
+        <li>Elem 03</li>
+    </ul>
+</body>
+</html>

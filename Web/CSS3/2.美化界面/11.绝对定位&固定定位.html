@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            height: 1500px;
+        }
+        div:nth-of-type(1){/*div1 绝对定位*/
+            width: 200px;
+            height: 200px;
+            background-color: burlywood;
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+        div:nth-of-type(2){/*div2 固定定位*/
+            width: 100px;
+            height: 100px;
+            background-color: coral;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>绝对定位</h2>
+    基于xxx定位 
+    position:absolute<br>
+    1.没有父级元素情况下，基于浏览器定位<br>
+    2.有父级元素存在定位，一般相对于父级元素进行偏移<br>
+    3.在父级元素范围内移动<br>
+    相对于父级或浏览器进行指定偏移，绝对定位(不?)在标准文档流中，原来位置不会保留<hr>
+    <h2>固定定位</h2>
+    position:fixed
+    <div>div1</div>
+    <div>div2</div>
+
+    <h2>z-index</h2>
+    层级属性<br>
+    最低=0 最高无限<br>
+    <h2>背景透明度属性</h2>
+    1.opacity<br>
+    2.filter:Alpha(opacity=0~100)(兼容性问题，两种都写上)
+</body>
+</html>

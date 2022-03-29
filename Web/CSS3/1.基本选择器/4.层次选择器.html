@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>层次选择器</title>
+    <style>
+        /* 后代选择器 对元素后所有元素选择 */
+
+        body p{
+            background-color: aqua;
+        } 
+
+        /* 子代选择器 对后一代元素选择 */
+
+        body>p{
+            background-color: aquamarine;
+        } 
+
+        /* 相邻兄弟选择器 只有一个相邻 对下不对上 */
+
+        .positive+p{
+            background-color: blueviolet;
+        } 
+
+        /* 通用选择器 当前选中元素向下所有兄弟元素 */
+
+        .active~p{
+            background-color: cornsilk;
+        }
+
+        /* 优先级:相邻=通用>后代=子代 */
+    </style>
+</head>
+<body>
+    <p>Number 1</p>
+    <p class="positive">Number 2</p>
+    <p>Number 3</p>
+    <ul>
+        <li>Number 4</li>
+        <li>Number 5</li>
+        <li>Number 6</li>
+    </ul>
+    <p class="active">007</p>
+    <p>008</p>
+</body>
+</html>

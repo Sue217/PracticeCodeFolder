@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "10035.C": "cpp",
+        "10037.C": "cpp",
+        "10036.C": "cpp",
+        "queue": "c",
+        "stack": "c"
+    }
+}

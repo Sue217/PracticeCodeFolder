@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Float</title>
+    <link rel="stylesheet" href="../2.美化界面/css/浮动.css">
+</head>
+<body>
+    <!-- 行内元素可以包含在块级元素元素中 而反之不行🙅 -->
+    <div class="A">div元素</div>
+    <span>span行内元素</span>
+    <p id="father">
+        <img src="../../resources/img/Apple.jpeg" alt="Apple">
+    </p>
+    <p>
+        <ol>解决父级边框塌陷方法:<br>
+            <li>增加父级元素高度<br>
+                #father{<br>border:1px solid red;<br>height:++}
+            </li>
+            <li>增加一个空div(class="clear")标签清除浮动<br>
+                <!-- <div class="clear"></div> -->
+                .clear{clear:both;margin:0;padding:0;}
+            </li>
+            <li>在父级增加一个overflow:hidden隐藏 scroll滚动
+            </li>
+            <li>在父类添加一个伪类<br>
+                #father:after{<br>content="";<br>display:block;<br>clear:both;}
+            </li>
+        </ol>
+        <ul>对比display和float:
+            <li>display<br>方向不可控</li>
+            <li>float<br>浮动起来会脱离标准文档流,所以要解决父级边框塌陷问题</li>
+        </ul>
+    </p>
+</body>
+</html>

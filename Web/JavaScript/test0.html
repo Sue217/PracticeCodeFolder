@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <script src="../JavaScript/test0.js"></script>
+</head>
+<body>
+    <h1 id="demo">One Head Title</h1>
+    <button onclick="Myfunction()" type="button">Click Here!</button>
+    <script>
+        function plusTen(num) {
+            num += 10;
+            return num;
+        }
+        function setName(obj) {
+            obj.name = "BOBLT";
+            return obj;
+        }
+        let tt = 2;
+        let kk = new Object();
+
+        console.log(tt);
+        console.log(plusTen(tt));
+        setName(kk);
+        console.log(kk.name);
+    </script>
+</body>
+</html>

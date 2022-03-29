@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景</title>
+    <style>
+        div{
+            height: 1200px;
+            width: 1200px;
+            border: 0.5px solid orange;
+            background-image: url(../../resources/img/Apple.jpeg);
+            /* 默认下图片是平铺的 */
+        }
+        .div1{
+            background-repeat: repeat-x;
+            /* 横向平铺 */
+        }
+        .div2{
+            background-repeat: repeat-y;
+            /* 纵向平铺 */
+        }
+        .div3{
+            background-repeat: no-repeat;
+        }
+        /* 不平铺 */
+    </style>
+</head>
+<body>
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <div class="div3"></div>
+
+    <!-- 渐变 linear-gradient() -->
+</body>
+</html>

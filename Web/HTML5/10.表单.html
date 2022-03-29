@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+    <!-- action:表单提交的位置,method:提交方法 -->
+    <!-- GET:在url中能看到提交的信息,不安全,高效,不能传输大文件 POST:比较安全,可以传输大文件 -->
+    <form action="1.Hello.html" method="POST">
+        <!-- value:默认初始值 name:键 maxlength:最大字符值 size:文本框长度 placeholder:提示信息 required必填(非空判断)  -->
+        <p>Username<input type="text" name="username" placeholder="请输入用户名" required></p>
+        <p>Password<input type="password" name="pwd" required></p>
+        
+        <!-- 所有选项框checked都可以作为默认选项 -->
+        <!-- 单选框标签radio value:单选框的值 name:表示组(要相同才是单选) -->
+        <p>
+            <input type="radio" value="male" name="gender"/>Male
+            <input type="radio" value="female" name="gender"/>Female
+        </p>
+
+        <!-- 多选框checkbox -->
+        <p>Hobby:
+            <input type="checkbox" value="coding" name="hobby"/>Coding
+            <input type="checkbox" value="playing" name="hobby"/>Playing
+            <input type="checkbox" value="sleeping" name="hobby"/>Sleeping
+            <input type="checkbox" value="football" name="hobby"/>Football
+            <input type="checkbox" value="writing" name="hobby"/>Writing
+        </p>
+
+        <!-- 按钮button -->
+        <p>按钮
+            <input type="button" value="Click" name="btn"/><br>
+            图片按钮:<br>
+            <!-- <input type="image" src="../resources/img/Apple.jpeg"> -->
+        </p>
+
+        <!-- 下拉框select,列表框option -->
+        <p>国家
+            <select name="列表名称">
+                <option value="列表选项">中国</option>
+                <option value="列表选项">美国</option>
+                <option value="列表选项">英国</option>
+                <option value="列表选项">法国</option>
+            </select>
+        </p>
+
+        <!-- 文本域textarea -->
+        <p>反馈
+            <textarea name="textarea" cols="50" rows="10">文本内容</textarea>
+        </p>
+        <!-- 文件域file -->
+        <input type="file" value="files" name="upload">
+        <input type="button" value="上传" name="btn">
+
+        <!-- 邮件验证email -->
+        <p>邮箱
+            <!-- pattern:正则表达式(可查 判断输入的格式是否正确) -->
+            <input type="email" name="email" placeholder="请输入邮箱地址" pattern="" required>
+        </p>
+        <!-- url验证 url -->
+        <p>url
+            <input type="url" name="url">
+        </p>
+        <!-- 数字验选择number -->
+        <p>商品数量(限购10件)
+            <input type="number" name="number" value="0" max="10" min="0" step="1">
+        </p>
+        <!-- 滑块range -->
+        <p>音量
+            <input type="range" name="volume" value="0" max="100" min="0" step="1">
+        </p>
+        <!-- 搜索框search -->
+        <p>搜索
+            <input type="search" name="search">
+        </p>
+        <!-- 增强鼠标可用性label -->
+        <p>
+            <label for="mark">Click</label>
+            <input type="text" id="mark">
+            <!-- id可以移动到其他文本框中 -->
+        </p>
+
+        <p>
+            <input type="submit" value="提交">
+            <input type="reset" value="清空">
+        </p>
+    </form>
+    <!-- 表单的应用 -->
+    <!-- 
+        readonly:只读(不能对内容进行修改)
+        disabled:禁用
+        hidden:隐藏
+     -->
+</body>
+</html>
