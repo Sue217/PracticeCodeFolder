@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 23.03.2022 10:40:00
+ *    created: 31.03.2022 16:57:31
 **/
 #include <bits/stdc++.h>
 
@@ -27,10 +27,7 @@ class dsu {
   }
 
   inline int get(int x) {
-    while (x != p[x]) {
-      x = p[x];
-    }
-    return x;
+    return (x == p[x] ? x : get(p[x]));
   }
 
   inline bool unite(int x, int y) {
@@ -39,18 +36,18 @@ class dsu {
     if (x == y) {
       return false;
     }
-    if (sz[x] < sz[y]) {
+    if (sz[x] > sz[y]) {
       swap(x, y);
     }
-    p[y] = x;
-    eg[y] = g[x];
-    sz[x] += sz[y];
+    p[x] = y;
+    eg[x] = g[y];
+    sz[y] += sz[x];
     return true;
   }
 
-  inline void add(int x, int y) {
+  inline void add(int x, int t) {
     x = get(x);
-    g[x] += y;
+    g[x] += t;
   }
 
   inline int goal(int x) {
@@ -65,27 +62,23 @@ int main() {
   cin >> n >> q;
   dsu d(n);
   while (q--) {
-    string op;
+    int op;
     cin >> op;
-    if (op == "join") {
+    if (op == 1) {
       int x, y;
       cin >> x >> y;
       --x; --y;
       d.unite(x, y);
     }
-    if (op == "add") {
-      int x, y;
-      cin >> x >> y;
+    if (op == 2) {
+      int x, t;
+      cin >> x >> t;
       --x;
-      d.add(x, y);
+      d.add(x, t);
     }
-    if (op == "get") {
-      int x;
-      cin >> x;
-      --x;
-      int ans = d.goal(x);
-      cout << ans << '\n';
-    }
+  }
+  for (int x = 0; x < n; x++) {
+    cout << d.goal(x) << " \n"[x == n - 1];
   }
   return 0;
 }
