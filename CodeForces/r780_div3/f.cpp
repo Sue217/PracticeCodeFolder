@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 01.04.2022 09:30:18
+ *    created: 01.04.2022 12:48:43
 **/
 #include <bits/stdc++.h>
 
@@ -18,20 +18,25 @@ int main() {
   int tt;
   cin >> tt;
   while (tt--) {
+    int n;
+    cin >> n;
     string s;
     cin >> s;
-    int n = (int) s.size();
-    vector<bool> pos(26);
-    int pair = 0;
+    int ans = 0;
     for (int i = 0; i < n; i++) {
-      if (pos[s[i] - 'a']) {
-        fill(pos.begin(), pos.end(), false);
-        pair += 1;
-      } else {
-        pos[s[i] - 'a'] = true;
+      int minus = 0, plus = 0;
+      for (int j = i; j < n; j++) {
+        if (s[j] == '+') {
+          plus += 1;
+        } else {
+          minus += 1;
+        }
+        if (minus >= plus && (minus - plus) % 3 == 0) {
+          ans += 1;
+        }
       }
     }
-    cout << n - pair * 2 << '\n';
+    cout << ans << '\n';
   }
   return 0;
 }

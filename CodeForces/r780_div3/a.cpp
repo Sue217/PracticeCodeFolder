@@ -24,11 +24,7 @@ int main() {
       cout << 1 << '\n';
       continue;
     }
-    if (a > b) {
-      cout << a + b + 1 << '\n';
-    } else {
-      cout << b * 2 + a + 1 << '\n';
-    }
+    cout << b * 2 + a + 1 << '\n';
   }
   return 0;
 }
