@@ -15,6 +15,8 @@
     "*.ASSEMBLE*": "hlasm",
     "*.HLASM*": "hlasm",
     "*.HLA*": "hlasm",
-    "vector": "cpp"
+    "vector": "cpp",
+    "ios": "cpp",
+    "chrono": "cpp"
   }
 }

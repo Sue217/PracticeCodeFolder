@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 01.04.2022 20:55:36
+ *    created: 02.04.2022 11:45:52
 **/
 #include <bits/stdc++.h>
 
@@ -34,9 +34,9 @@ class dsu {
     if (x == y) {
       return false;
     }
-    // if (sz[x] > sz[y]) {
-    //   swap(x, y);
-    // }
+    if (sz[x] > sz[y]) {
+      swap(x, y);
+    }
     p[x] = y;
     sz[y] += sz[x];
     return true;
@@ -49,6 +49,11 @@ class dsu {
       return true;
     }
     return false;
+  }
+  
+  inline int size(int x) {
+    x = get(x);
+    return sz[x];
   }
 };
 
@@ -64,58 +69,58 @@ int main() {
     }
   }
   dsu d(n * m);
-  array<int, 4> dx{-1, 0, 1, 0}, dy{0, -1, 0, 1};
-  string wall = "NWSE";
+  int rooms = n * m;
+  int mx = 1;
+  array<int, 4> dx{0, -1, 0, 1}, dy{-1, 0, 1, 0}, wall{1, 2, 4, 8}; // WNES
   for (int x = 0; x < n; x++) {
     for (int y = 0; y < m; y++) {
+      int c = x * m + y;
       for (int dd = 0; dd < 4; dd++) {
         if ((g[x][y] >> dd & 1) == 0) {
           int xx = x + dx[dd];
           int yy = y + dy[dd];
           if (0 <= xx && xx < n && 0 <= yy && yy < m) {
-            int c = x * m + y;
             int cc = xx * m + yy;
-            d.unite(c, cc);
-          }
-        }
-      }
-    }
-  }
-  int rooms = 0, mx = 1;
-  for (int cc = 0; cc < n * m; cc++) {
-    if (d.get(cc) == cc) {
-      rooms += 1;
-      mx = max(mx, d.sz[cc]);
-    }
-  }
-  cout << rooms << '\n';
-  cout << mx << '\n';
-  int wa = 0, wx = 0, wy = 0;
-  // for (int y = m - 1; y >= 0; y--) {
-  //   for (int x = 0; x < n; x++) {
-  for (int y = 0; y < m; y++) {
-    for (int x = n - 1; x >= 0; x--) {
-      for (int dd = 0; dd < 4; dd++) {
-        if ((g[x][y] >> dd & 1) == 1) {
-          int xx = x + dx[dd];
-          int yy = y + dy[dd];
-          if (0 <= xx && xx < n && 0 <= yy && yy < m) {
-            int c = x * m + y;
-            int cc = xx * m + y;
-            if (!d.united(c, cc)) {
-              if (d.sz[c] + d.sz[cc] > mx) {
-                mx = d.sz[c] + d.sz[cc];
-                wa = wall[dd];
-                wx = x + 1;
-                wy = y + 1;
-              }
+            if (d.unite(c, cc)) {
+              rooms -= 1;
+              mx = max(mx, d.size(cc));
             }
           }
         }
       }
     }
   }
+  cout << rooms << '\n';
   cout << mx << '\n';
-  cout << wx << " " << wy << " " << (wa == 4 ? 'E' : 'N') << '\n';
+  int wa = 0, wx = 0, wy = 0;
+  for (int y = 0; y < m; y++) {
+    for (int x = n - 1; x >= 0; x--) {
+      int c = x * m + y;
+      for (int dd = 0; dd < 4; dd++) {
+        if ((g[x][y] >> dd & 1) != 0) {
+          int xx = x + dx[dd];
+          int yy = y + dy[dd];
+          if (0 <= xx && xx < n && 0 <= yy && yy < m) {
+            int cc = xx * m + yy;
+            if (!d.united(c, cc) && mx < d.size(c) + d.size(cc)) {
+              mx = d.size(c) + d.size(cc);
+              wa = dd;
+              wx = x + 1;
+              wy = y + 1;
+            }
+          }
+        }
+      }
+    }
+  }
+  char w;
+  switch (wa) {
+    case 0: w = 'W'; break;
+    case 1: w = 'N'; break;
+    case 2: w = 'E'; break;
+    case 3: w = 'S'; break;
+  }
+  cout << mx << '\n';
+  cout << wx << " " << wy << " " << w << '\n';
   return 0;
 }
