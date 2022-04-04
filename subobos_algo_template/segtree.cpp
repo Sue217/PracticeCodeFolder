@@ -6,20 +6,41 @@
 
 using namespace std;
 
+const int inf = (int) 1.01e9;
+
 class segtree {
- private:
-  const int inf = (int) 1.01e9;
-
  public:
+    /*
   struct node {
-    pair<int, int> a = make_pair(inf, inf);
+    array<int, CNT> a;
 
-    void apply(int l, int r, pair<int, int> v) {
+    void apply(int l, int r, char c) {
+      int id = (int) (c - 'a');
+      a = init[id];
+    }
+  };
+
+  node unite(const node &a, const node &b) const {
+    node res;
+    fill(res.a.begin(), res.a.end(), inf);
+    for (int i = 0; i < CNT; i++) {
+      for (int j = 0; j < CNT; j++) {
+        if (to[i][j] != -1) {
+          res.a[to[i][j]] = min(res.a[to[i][j]], a.a[i] + b.a[j]);
+        }
+      }
+    }
+    return res;
+  }*/
+  struct node {
+    int a = inf;
+
+    void apply(int l, int r, int v) {
       a = v;
     }
   };
 
-  node unite(const node& a, const node& b) const {
+  node unite(const node &a, const node &b) const {
     node res;
     res.a = min(a.a, b.a);
     return res;
@@ -28,8 +49,8 @@ class segtree {
   inline void push(int x, int l, int r) {
   }
 
-  inline void pull(int x, int y) {
-    tree[x] = unite(tree[x + 1], tree[y]);
+  inline void pull(int x, int z) {
+    tree[x] = unite(tree[x + 1], tree[z]);
   }
 
   int n;
@@ -47,7 +68,7 @@ class segtree {
   }
 
   template <typename M>
-  void build(int x, int l, int r, const vector<M>& v) {
+  void build(int x, int l, int r, const vector<M> &v) {
     if (l == r) {
       tree[x].apply(l, r, v[l]);
       return;
@@ -60,7 +81,7 @@ class segtree {
   }
 
   node get(int x, int l, int r, int ll, int rr) {
-    if (l >= ll && r <= rr) {
+    if (ll <= l && r <= rr) {
       return tree[x];
     }
     int y = (l + r) >> 1;
@@ -82,12 +103,12 @@ class segtree {
 
   template <typename... M>
   void modify(int x, int l, int r, int ll, int rr, const M&... v) {
-    if (l >= ll && r <= rr) {
+    if (ll <= l && r <= rr) {
       tree[x].apply(l, r, v...);
       return;
     }
     int y = (l + r) >> 1;
-    int z = ((y - l + 1) << 1);
+    int z = x + ((y - l + 1) << 1);
     push(x, l, r);
     if (ll <= y) {
       modify(x + 1, l, y, ll, rr, v...);

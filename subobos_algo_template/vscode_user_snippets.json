@@ -58,7 +58,7 @@
 			"/*",
 			"  ID: sujingb1",
 			"  TASK: test",
-			"  LANG: C++17",
+			"  LANG: C++14",
 			"*/",
 			"#include <bits/stdc++.h>",
 			"",
@@ -112,7 +112,7 @@
       "  }",
       "",
       "  inline int get(int x) {",
-      "    return (x == p[x] ? x : (p[x] = get(p[x])));",
+      "    return (x == p[x] ? x : get(p[x]));",
       "  }",
       "",
       "  inline bool unite(int x, int y) {",
@@ -180,9 +180,7 @@
   "random": {
     "prefix": "random",
     "body": [
-      "",
-      "mt19937 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().count());",
-      ""
+      "mt19937 rng((unsigned int) chrono::steady_clock::now().time_since_epoch().count());"
     ]
   },
   "fastpower": {
