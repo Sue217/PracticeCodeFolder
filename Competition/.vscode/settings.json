@@ -19,6 +19,9 @@
     "ios": "cpp",
     "vector": "cpp",
     "random": "cpp",
-    "regex": "cpp"
+    "regex": "cpp",
+    "tuple": "cpp",
+    "queue": "cpp",
+    "set": "cpp"
   }
 }
