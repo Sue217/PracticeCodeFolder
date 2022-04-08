@@ -23,6 +23,7 @@ int main() {
   s += in;
   vector<vector<long long>> f(n + 1, vector<long long>(n + 1));
   vector<vector<long long>> g(n + 1, vector<long long>(n + 1));
+  vector<vector<long long>> h(n + 1, vector<long long>(n + 1));
   static constexpr long long mod = (long long) 1e9 + 7;
   for (int d = 0; d < n; d++) {
     for (int l = 1; l + d <= n; l++) {
@@ -47,12 +48,7 @@ int main() {
         // (A)
         g[l][r] = (g[l][r] + f[l + 1][r - 1]) % mod;
         // (SA)
-        for (int p = l + 1; p < r - 1 && p - l <= k; p++) {
-          if (s[p] != '*' && s[p] != '?') {
-            break;
-          }
-          g[l][r] = (g[l][r] + f[p + 1][r - 1]) % mod;
-        }
+        g[l][r] = (g[l][r] + h[l + 1][r - 1]) % mod;
         // (AS)
         for (int p = r - 1; p > l + 1 && r - p <= k; p--) {
           if (s[p] != '*' && s[p] != '?') {
@@ -65,17 +61,16 @@ int main() {
       f[l][r] = g[l][r];
       if (s[l] == '(' || s[l] == '?') {
         for (int m = l + 1; m < r; m++) {
-          // AB
-          long long sum = f[m + 1][r];
-          // ASB
-          for (int p = m + 1; p < r && p - m <= k; p++) {
-            if (s[p] != '*' && s[p] != '?') {
-              break;
-            }
-            sum = (sum + f[p + 1][r]) % mod;
-          }
-          f[l][r] = (f[l][r] + g[l][m] * sum % mod) % mod;
+          // AB f[m + 1][r]
+          // ASB (B[SA]) h[m + 1][r]
+          f[l][r] = (f[l][r] + g[l][m] * (f[m + 1][r] + h[m + 1][r]) % mod) % mod;
         }
+      }
+      for (int p = l; p < r && p - l + 1 <= k; p++) {
+        if (s[p] != '*' && s[p] != '?') {
+          break;
+        }
+        h[l][r] = (h[l][r] + f[p + 1][r]) % mod;
       }
     }
   }
