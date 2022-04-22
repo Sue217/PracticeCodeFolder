@@ -17,6 +17,7 @@
     "*.HLA*": "hlasm",
     "vector": "cpp",
     "ios": "cpp",
-    "chrono": "cpp"
+    "chrono": "cpp",
+    "iostream": "cpp"
   }
 }

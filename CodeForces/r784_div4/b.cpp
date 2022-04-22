@@ -1,6 +1,6 @@
 /**
  *    author: subobo
- *    created: 21.04.2022 22:35:23
+ *    created: 21.04.2022 22:37:49
 **/
 #include <bits/stdc++.h>
 
@@ -18,19 +18,19 @@ int main() {
   int tt;
   cin >> tt;
   while (tt--) {
-    int rt;
-    cin >> rt;
-    if (rt <= 1399) {
-      cout << "Division 4\n";
-    } else 
-    if (1400 <= rt && rt <= 1599) {
-      cout << "Division 3\n";
-    } else
-    if (1600 <= rt && rt <= 1899) {
-      cout << "Division 2\n";
-    } else {
-      cout << "Division 1\n";
+    int n;
+    cin >> n;
+    map<int, int> m;
+    int ans = -1;
+    for (int i = 0; i < n; i++) {
+      int x;
+      cin >> x;
+      m[x] += 1;
+      if (m[x] >= 3) {
+        ans = x;
+      }
     }
+    cout << ans << '\n';
   }
   return 0;
 }
