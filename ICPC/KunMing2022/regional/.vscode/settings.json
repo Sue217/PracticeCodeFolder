@@ -17,6 +17,8 @@
     "*.HLA*": "hlasm",
     "iostream": "cpp",
     "vector": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "functional": "cpp",
+    "iomanip": "cpp"
   }
 }
