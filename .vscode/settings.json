@@ -110,6 +110,8 @@
     "tuple": "cpp",
     "typeindex": "cpp",
     "typeinfo": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "__availability": "cpp",
+    "memory_resource": "cpp"
   }
 }

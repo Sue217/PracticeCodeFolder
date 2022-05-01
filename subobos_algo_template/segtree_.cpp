@@ -2,53 +2,82 @@
 
 using namespace std;
 
-const int N = 500010;
+constexpr int N = 100010;
 
-vector<int> seg(N * 4 + 1);
+vector<long long> tree(N * 4);
+vector<long long> val(N * 4);
+vector<long long> node(N);
 
-// build(1, n, n);
 inline void build(int x, int l, int r) {
   if (l == r) {
-    seg[x] = l;
+    tree[x] = node[l];
     return;
   }
   int m = (l + r) >> 1;
   build(x + x, l, m);
   build(x + x + 1, m + 1, r);
-  seg[x] = seg[x + x] + seg[x + x + 1];
+  tree[x] = tree[x + x] + tree[x + x + 1];
 }
 
-// modify(1, 1, n, x, y)
-inline void modify(int x, int l, int r, int y, int z) {
-  seg[x] += y;
-  if (l == r) {
+template <typename M>
+inline void modify(int x, int l, int r, int ll, int rr, M v) {
+  if (l == ll && r == rr) {
+    val[x] += v;
     return;
   }
+  tree[x] += v * (rr - ll + 1);
   int m = (l + r) >> 1;
-  if (x <= m) {
-    modify(x + x, l, m, y, z);
+  if (rr <= m) {
+    modify(x + x, l, m, ll, rr, v);
   } else {
-    modify(x + x + 1, m + 1, r, y, z);
+    if (ll > m) {
+      modify(x + x + 1, m + 1, r, ll, rr, v);
+    } else {
+      modify(x + x, l, m, ll, m, v);
+      modify(x + x + 1, m + 1, r, m + 1, rr, v);
+    }
   }
 }
 
-// get(1, 1, n, l, r)
-inline int get(int x, int l, int r, int ll, int rr) {
+template <typename M>
+inline M get(int x, int l, int r, int ll, int rr, M s) {
+  s += val[x];
   if (l == ll && r == rr) {
-    return seg[x];
+    return tree[x] + s * (rr - ll + 1);
   }
   int m = (l + r) >> 1;
   if (rr <= m) {
-    return get(x + x, l, m, ll, rr);
+    return get(x + x, l, m, ll, rr, s);
   } else {
     if (ll > m) {
-      return get(x + x + 1, m + 1, r, ll, rr);
+      return get(x + x + 1, m + 1, r, ll, rr, s);
     } else {
-      return get(x + x, l, m, ll, m) + get(x + x + 1, m + 1, r, m + 1, rr);
+      return get(x + x, l, m, ll, m, s) + get(x + x + 1, m + 1, r, m + 1, rr, s);
     }
   }
 }
 
 int main() {
+  int n, q;
+  cin >> n >> q;
+  for (int i = 1; i <= n; i++) {
+    cin >> node[i];
+  }
+  build(1, 1, n);
+  while (q--) {
+    int op, x, y;
+    long long z = 0;
+    cin >> op;
+    if (op == 1) {
+      cin >> x >> y >> z;
+      /* modify(1, 1, n, x, x, y); */
+      modify(1, 1, n, x, y, z);
+    }
+    if (op == 2) {
+      cin >> x >> y;
+      /* cout << get(1, 1, n, x, y) << '\n'; */
+      cout << get(1, 1, n, x, y, z) << '\n';
+    }
+  }
   return 0;
 }
