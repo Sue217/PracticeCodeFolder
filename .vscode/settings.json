@@ -112,6 +112,7 @@
     "typeinfo": "cpp",
     "variant": "cpp",
     "__availability": "cpp",
-    "memory_resource": "cpp"
+    "memory_resource": "cpp",
+    "ranges": "cpp"
   }
 }
