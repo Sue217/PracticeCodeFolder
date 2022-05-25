@@ -113,6 +113,7 @@
     "variant": "cpp",
     "__availability": "cpp",
     "memory_resource": "cpp",
-    "ranges": "cpp"
+    "ranges": "cpp",
+    "*.tcc": "cpp"
   }
 }

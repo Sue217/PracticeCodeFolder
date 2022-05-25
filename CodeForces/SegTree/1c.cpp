@@ -1,6 +1,6 @@
 /**
- *    author: Jingbo Su
- *    created: 25.05.2022
+ *    author: subobo
+ *    created: 25.05.2022 09:19:09
 **/
 #include <bits/stdc++.h>
 
@@ -56,17 +56,17 @@ class segtree {
     build(a, 0, 0, n);
   }
 
-  inline void modify(int x, T v, int y, int l, int r) {
-    if (r == l + 1) {
+  inline void modify(int x, T v, int y, int ll, int rr) {
+    if (rr == ll + 1) {
       tree[y] = v;
       node[y].first = v;
       return;
     }
-    int m = (l + r) >> 1;
+    int m = (ll + rr) >> 1;
     if (x < m) {
-      modify(x, v, y + y + 1, l, m);
+      modify(x, v, y + y + 1, ll, m);
     } else {
-      modify(x, v, y + y + 2, m, r);
+      modify(x, v, y + y + 2, m, rr);
     }
     tree[y] = pull(tree[y + y + 1], tree[y + y + 2]);
     node[y] = unite(node[y + y + 1], node[y + y + 2]);

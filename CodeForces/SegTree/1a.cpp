@@ -1,6 +1,6 @@
 /**
- *    author: Jingbo Su
- *    created: 25.05.2022
+ *    author: subobo
+ *    created: 25.05.2022 09:19:09
 **/
 #include <bits/stdc++.h>
 
@@ -17,22 +17,12 @@ class segtree {
  public:
   int n;
   vector<T> tree;
-  vector<pair<T, int>> node;
+  vector<T> min_val;
 
   segtree(int _n) : n(_n) {
     assert(n > 0);
     tree.resize(n << 2);
-    node.resize(n << 2);
-  }
-
-  T pull(const T& a, const T& b) const {
-    return a + b;
-  }
-
-  pair<T, int> unite(const pair<T, int>& a, const pair<T, int>& b) const {
-    if (a.first < b.first) return a;
-    if (a.first > b.first) return b;
-    return make_pair(a.first, a.second + b.second);
+    min_val.resize(n << 2);
   }
 
   template <typename M>
@@ -40,15 +30,15 @@ class segtree {
     if (r == l + 1) {
       if (l < (int) a.size()) {
         tree[x] = static_cast<T> (a[l]);
-        node[x] = make_pair(static_cast<T> (a[l]), 1);
+        min_val[x] = static_cast<T> (a[l]);
       }
       return;
     }
     int m = (l + r) >> 1;
     build(a, x + x + 1, l, m);
     build(a, x + x + 2, m, r);
-    tree[x] = pull(tree[x + x + 1], tree[x + x + 2]);
-    node[x] = unite(node[x + x + 1], node[x + x + 2]);
+    tree[x] = tree[x + x + 1] + tree[x + x + 2];
+    min_val[x] = min(min_val[x + x + 1], min_val[x + x + 2]);
   }
 
   template <typename M>
@@ -56,20 +46,20 @@ class segtree {
     build(a, 0, 0, n);
   }
 
-  inline void modify(int x, T v, int y, int l, int r) {
-    if (r == l + 1) {
+  inline void modify(int x, T v, int y, int ll, int rr) {
+    if (rr == ll + 1) {
       tree[y] = v;
-      node[y].first = v;
+      min_val[y] = v;
       return;
     }
-    int m = (l + r) >> 1;
+    int m = (ll + rr) >> 1;
     if (x < m) {
-      modify(x, v, y + y + 1, l, m);
+      modify(x, v, y + y + 1, ll, m);
     } else {
-      modify(x, v, y + y + 2, m, r);
+      modify(x, v, y + y + 2, m, rr);
     }
-    tree[y] = pull(tree[y + y + 1], tree[y + y + 2]);
-    node[y] = unite(node[y + y + 1], node[y + y + 2]);
+    tree[y] = tree[y + y + 1] + tree[y + y + 2];
+    min_val[y] = min(min_val[y + y + 1], min_val[y + y + 2]);
   }
 
   inline void modify(int x, T v) {
@@ -82,24 +72,24 @@ class segtree {
     int m = (ll + rr) >> 1;
     auto left = get(x + x + 1, l, r, ll, m);
     auto right = get(x + x + 2, l, r, m, rr);
-    return pull(left, right);
+    return left + right;
   }
 
   inline T get(int l, int r) {
     return get(0, l, r, 0, n);
   }
   
-  inline pair<T, int> find(int x, int l, int r, int ll, int rr) {
-    if (ll >= r || l >= rr) return make_pair(numeric_limits<T>::max(), 0);
-    if (ll >= l && r >= rr) return node[x];
+  inline T find_min(int x, int l, int r, int ll, int rr) {
+    if (ll >= r || l >= rr) return numeric_limits<T>::max();
+    if (ll >= l && r >= rr) return min_val[x];
     int m = (ll + rr) >> 1;
-    auto left = find(x + x + 1, l, r, ll, m);
-    auto right = find(x + x + 2, l, r, m, rr);
-    return unite(left, right);
+    auto left = find_min(x + x + 1, l, r, ll, m);
+    auto right = find_min(x + x + 2, l, r, m, rr);
+    return min(left, right);
   }
 
-  inline pair<T, int> find(int l, int r) {
-    return find(0, l, r, 0, n);
+  inline T find_min(int l, int r) {
+    return find_min(0, l, r, 0, n);
   }
 };
 
@@ -126,7 +116,8 @@ int main() {
     if (op == 2) {
       int l, r;
       cin >> l >> r;
-      cout << st.find(l, r).first << " " << st.find(l, r).second << '\n';
+      cout << st.get(l, r) << '\n';
+      // cout << st.find_min(l, r) << '\n';
     }
   }
   return 0;
