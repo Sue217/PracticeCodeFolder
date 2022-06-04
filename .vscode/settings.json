@@ -114,6 +114,15 @@
     "__availability": "cpp",
     "memory_resource": "cpp",
     "ranges": "cpp",
-    "*.tcc": "cpp"
+    "*.tcc": "cpp",
+    "barrier": "cpp",
+    "concepts": "cpp",
+    "cuchar": "cpp",
+    "source_location": "cpp",
+    "latch": "cpp",
+    "numbers": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp",
+    "syncstream": "cpp"
   }
 }
