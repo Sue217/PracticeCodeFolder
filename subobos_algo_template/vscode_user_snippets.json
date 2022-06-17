@@ -191,7 +191,7 @@
     "body": [
       "",
       "template <typename T>",
-      "T dijkstra(const vector<vector<pair<int, int>>>& g, int from, int to) {",
+      "T dijkstra(const vector<vector<pair<int, T>>>& g, int from, int to) {",
       "  int n = (int) g.size();",
       "  auto inf = numeric_limits<T>::max();",
       "  assert(0 <= from && from < n && 0 <= to && to < n);",
@@ -208,8 +208,8 @@
       "    }",
       "    for (auto& e : g[i]) {",
       "      int to = e.first;",
-      "      int cost = e.second;",
-      "     if (dist[i] + cost < dist[to]) {",
+      "      T cost = e.second;",
+      "      if (dist[i] + cost < dist[to]) {",
       "        dist[to] = dist[i] + cost;",
       "        s.emplace(dist[to], to);",
       "      }",
@@ -785,6 +785,35 @@
       "  }",
       "}",
       ""
+    ]
+  },
+  "Diff" : {
+    "prefix": "diff",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "",
+      "using namespace std;",
+      "",
+      "int main() {",
+      "  ios::sync_with_stdio(false);",
+      "  cout.tie(0);",
+      "  int tt = 1;",
+      "  for (int qq = 1; qq <= tt; qq++) {",
+      "    cout << \"The result of Case #\" << qq << \" is \";",
+      "    system(\"./gen> in\");",
+      "    system(\"./stupid< in >stdout\");",
+      "    system(\"./sol< in >out\");",
+      "    if (system(\"diff out stdout\")) {",
+      "      cout << \"wrong\" << '\\n' << '\\n';",
+      "      cout << \"Wrong Answer\" << '\\n';",
+      "      return 0;",
+      "    }",
+      "    cout << \"correct\" << '\\n';",
+      "  }",
+      "  cout << '\\n';",
+      "  cout << \"Accepted\" << '\\n';",
+      "  return 0;",
+      "}"
     ]
   },
 }
