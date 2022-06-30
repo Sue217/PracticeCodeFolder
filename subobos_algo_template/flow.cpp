@@ -1,6 +1,6 @@
 /**
  *    author:  tourist
- *    created: 24.04.2022 18:42:10       
+ *    created: 19.06.2022 17:11:28       
 **/
 #include <bits/stdc++.h>
 
@@ -144,59 +144,56 @@ class dinic {
   }
 };
 
-
 int main() {
   ios::sync_with_stdio(false);
   cin.tie(0);
   int n;
   cin >> n;
-  vector<vector<int>> a(n, vector<int>(n));
+  vector<int> a(n);
+  vector<int> b(n);
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      cin >> a[i][j];
-      --a[i][j];
+    cin >> a[i] >> b[i];
+  }
+  int m;
+  cin >> m;
+  vector<vector<int>> g(n);
+  for (int i = 0; i < m; i++) {
+    int x, y;
+    cin >> x >> y;
+    --x; --y;
+    g[x].push_back(y);
+    g[y].push_back(x);
+  }
+  int sum = accumulate(a.begin(), a.end(), 0);
+  for (int i = 0; i < n; i++) {
+    for (int j : g[i]) {
+      a[i] = max(a[i], min(b[i], b[j]));
     }
   }
-  vector<vector<int>> b(n, vector<int>(n));
+  flow_graph<int> f(n + n * 100 + 2, n + n * 100, n + n * 100 + 1);
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      cin >> b[i][j];
+    f.add(f.st, i, max(0, b[i] - a[i]), 0);
+    for (int j = 0; j < 100; j++) {
+      int nxt = (j == 99 ? f.fin : n + i * 100 + j + 1);
+      f.add(n + i * 100 + j, nxt, max(0, (j + 1) - a[i]), 0);
     }
   }
-  flow_graph<int> g(2 * n * n + 2, 2 * n * n, 2 * n * n + 1);
-  const int inf = (int) 1e9;
+  const int inf = (int) 1e6;
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      g.add(2 * (i * n + j) + 0, 2 * (i * n + j) + 1, n * n - b[i][j], 0);
-      if (a[i][j] == 0) {
-        g.add(2 * n * n, 2 * (i * n + j) + 0, inf, 0);
+    for (int j : g[i]) {
+      if (a[i] >= b[i] && a[j] >= b[j]) {
+        continue;
       }
-      if (a[i][j] == n - 1) {
-        g.add(2 * (i * n + j) + 1, 2 * n * n + 1, inf, 0);
+      if (a[i] >= b[j] && a[j] >= b[i]) {
+        continue;
+      }
+      if (b[i] > b[j]) {
+        f.add(i, n + j * 100 + (b[i] - 1), inf, 0);
       }
     }
   }
-  for (int i = 0; i < n; i++) {
-    vector<int> order(n);
-    iota(order.begin(), order.end(), 0);
-    sort(order.begin(), order.end(), [&](int x, int y) {
-      return a[i][x] < a[i][y];
-    });
-    for (int j = 0; j < n - 1; j++) {
-      g.add(2 * (i * n + order[j]) + 1, 2 * (i * n + order[j + 1]) + 0, inf, 0);
-    }
-  }
-  for (int i = 0; i < n; i++) {
-    vector<int> order(n);
-    iota(order.begin(), order.end(), 0);
-    sort(order.begin(), order.end(), [&](int x, int y) {
-      return a[x][i] < a[y][i];
-    });
-    for (int j = 0; j < n - 1; j++) {
-      g.add(2 * (order[j] * n + i) + 1, 2 * (order[j + 1] * n + i) + 0, inf, 0);
-    }
-  }
-  dinic<int> d(g);
-  cout << n * n * n - d.max_flow() << '\n';
+  dinic<int> d(f);
+  int res = accumulate(a.begin(), a.end(), 0) + d.max_flow();
+  cout << res - sum << '\n';
   return 0;
 }
