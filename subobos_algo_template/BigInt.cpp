@@ -210,21 +210,21 @@ bool operator<(BigInt& lhs, BigInt& rhs) {
   if (s1 == 1 && s2 == 1) return x > y;
   return {};
 }
-bool operator>=(BigInt& lhs, BigInt& rhs) { return !(lhs < rhs); }
+bool operator>=(BigInt lhs, BigInt rhs) { return !(lhs < rhs); }
 
-BigInt operator+(BigInt& lhs, BigInt& rhs) { return lhs += rhs; }
+BigInt operator+(BigInt lhs, BigInt rhs) { return lhs += rhs; }
 template <typename U> BigInt operator+(BigInt& lhs, U rhs) { return lhs += rhs; }
 template <typename U> BigInt operator+(U lhs, BigInt& rhs) { return lhs += rhs; }
 
-BigInt operator-(BigInt& lhs, BigInt& rhs) { return lhs -= rhs; }
-template <typename U> BigInt operator-(BigInt& lhs, U rhs) { return lhs -= rhs; }
-template <typename U> BigInt operator-(U lhs, BigInt& rhs) { return lhs -= rhs; }
+BigInt operator-(BigInt lhs, BigInt rhs) { return lhs -= rhs; }
+template <typename U> BigInt operator-(BigInt lhs, U rhs) { return lhs -= rhs; }
+template <typename U> BigInt operator-(U lhs, BigInt rhs) { return lhs -= rhs; }
 
-BigInt operator*(BigInt& lhs, BigInt& rhs) { return lhs *= rhs; }
-template <typename U> BigInt operator*(BigInt& lhs, U rhs) { return lhs *= rhs; }
-template <typename U> BigInt operator*(U lhs, BigInt& rhs) { return lhs *= rhs; }
+BigInt operator*(BigInt lhs, BigInt rhs) { return lhs *= rhs; }
+template <typename U> BigInt operator*(BigInt lhs, U rhs) { return lhs *= rhs; }
+template <typename U> BigInt operator*(U lhs, BigInt rhs) { return lhs *= rhs; }
 
-template <typename U> BigInt operator/(BigInt& lhs, U rhs) { return lhs /= rhs; }
+template <typename U> BigInt operator/(BigInt lhs, U rhs) { return lhs /= rhs; }
 
 void BigInt::read(const string& s) {
   sign = 0;
@@ -277,5 +277,13 @@ int main() {
   cin.tie(0);
   BigInt x, y;
   cin >> x >> y;
+  int z;
+  cin >> z;
+  cout << x << y << z << '\n';
+  BigInt a = x + y;
+  BigInt b = x - y;
+  BigInt c = x * y;
+  BigInt d = x / z;
+  cout << a << " " << b << " " << c << " " << d << '\n';
   return 0;
 }
