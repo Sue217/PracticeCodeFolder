@@ -4,7 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/local/include"
+                "/Library/Developer/CommandLineTools/usr/include/"
             ],
             "defines": [],
             "macFrameworkPath": [],

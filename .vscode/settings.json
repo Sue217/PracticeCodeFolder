@@ -123,7 +123,8 @@
     "numbers": "cpp",
     "semaphore": "cpp",
     "stop_token": "cpp",
-    "syncstream": "cpp"
+    "syncstream": "cpp",
+    "__functional_03": "cpp"
   },
   "C_Cpp.autocompleteAddParentheses": true
 }
